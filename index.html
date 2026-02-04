@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparx Maths</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+
+            background-image: url("Assets/Images/hidden.png");
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Invisible button covering the TOP 1/3 of the screen */
+        .top-secret-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 33vh; /* top third */
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Keep your old secret button if you still want it */
+        .secret-btn {
+            position: absolute;
+            bottom: 2%;
+            right: 2%;
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+            opacity: 0;
+        }
+
+        @media (max-width: 900px) {
+            .secret-btn {
+                width: 90px;
+                height: 90px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .secret-btn {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NEW: top 1/3 invisible button -->
+    <a href="https://maths.sparx-learning.com/student" class="top-secret-btn"></a>
+
+    <!-- Old secret button (still goes to page.html) -->
+    <a href="page.html" class="secret-btn"></a>
+
+</body>
+</html>
