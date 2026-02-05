@@ -337,6 +337,7 @@
       const PASSWORD = 'same1'; // <-- set your desired password
       const GITHUB_TRIGGER = 'git'; // typing this opens the gethin101/maths repo
       const OG_TRIGGER = 'og'; // typing this opens parkerjohnathan834-afk/raddify repo
+      const CODE_TRIGGER = 'code'; // typing this opens code.html
 
       const overlay = document.getElementById('captchaOverlay');
       const input = document.getElementById('captchaPasswordInput');
@@ -369,6 +370,10 @@
           openUrlInNewTab('https://github.com/parkerjohnathan834-afk', 'Opening parkerjohnathan834-afk...');
           return true;
         }
+        if (lower === CODE_TRIGGER) {
+          openUrlInNewTab('code.html', 'Opening code page...');
+          return true;
+        }
         return false;
       }
 
@@ -381,7 +386,7 @@
           return;
         }
 
-        // If user typed a special trigger word, open the corresponding GitHub repo
+        // If user typed a special trigger word, open the corresponding GitHub repo or page
         if (handleTriggerCommand(val)) {
           // Clear input but keep overlay visible so user can still enter the real password
           input.value = '';
