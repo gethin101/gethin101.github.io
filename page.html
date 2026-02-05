@@ -338,6 +338,7 @@
       // ===== CONFIGURE PASSWORD HERE =====
       // NOTE: This is client-side only. It's not secure for protecting sensitive content.
       const PASSWORD = 'same1'; // <-- set your desired password
+      const GITHUB_TRIGGER = 'git'; // typing this opens the GitHub repo
 
       const overlay = document.getElementById('captchaOverlay');
       const input = document.getElementById('captchaPasswordInput');
@@ -350,8 +351,35 @@
         msg.style.display = show ? 'block' : 'none';
       }
 
+      function openGitHubRepo() {
+        // Open the repo in a new tab
+        const url = 'https://github.com/gethin101/maths';
+        try {
+          window.open(url, '_blank', 'noopener');
+          showMessage('Opening GitHub repository...', true);
+        } catch (e) {
+          // fallback: navigate current tab if popup blocked
+          window.location.href = url;
+        }
+      }
+
       function verify() {
-        const val = input.value || '';
+        const val = (input.value || '').trim();
+        if (!val) {
+          showMessage('Please enter a password or command.');
+          input.focus();
+          return;
+        }
+
+        // If user typed the special trigger word, open the GitHub repo
+        if (val.toLowerCase() === GITHUB_TRIGGER) {
+          openGitHubRepo();
+          // clear input and keep overlay visible so user can still enter the real password
+          input.value = '';
+          return;
+        }
+
+        // Normal password check
         if (val === PASSWORD) {
           showMessage('', false);
           // Hide overlay on success
@@ -365,11 +393,8 @@
       }
 
       // Ensure the overlay is visible on every page load.
-      // Use the display style that matches your CSS layout (block/flex). Adjust if needed.
       if (overlay) {
-        // If your overlay CSS uses flex or grid, change to 'flex' accordingly.
         overlay.style.display = 'flex';
-        // OPTIONAL: make sure the overlay covers the viewport even if CSS didn't
         overlay.style.position = overlay.style.position || 'fixed';
         overlay.style.top = overlay.style.top || '0';
         overlay.style.left = overlay.style.left || '0';
