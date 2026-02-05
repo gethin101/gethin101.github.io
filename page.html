@@ -44,11 +44,13 @@
                 <div class="card-logo"></div>
             </div>
             <div class="captcha-content">
-                <h3>Captcha</h3>
-                <input type="text" class="captcha-input" placeholder="Enter last 4 digits">
+                <h3>Verification</h3>
+                <!-- Changed to a password input and added an id for scripting -->
+                <input id="captchaPasswordInput" type="password" class="captcha-input" placeholder="Enter password">
                 <div class="captcha-buttons">
-                    <button class="captcha-btn confirm-btn">Confirm</button>
+                    <button id="captchaConfirmBtn" class="captcha-btn confirm-btn">Confirm</button>
                 </div>
+                <div id="captchaMessage" style="color:#e74c3c;margin-top:8px;display:none;"></div>
             </div>
         </div>
     </div>
@@ -79,7 +81,7 @@
 
     <div class="hero-banner">
         <div class="banner-content">
-            <img src="Assets/Images/Logo.png" alt=Sparx Logo" class="banner-logo">
+            <img src="Assets/Images/Logo.png" alt="Sparx Logo" class="banner-logo">
             <h1>Revision</h1>
         </div>
     </div>
@@ -330,6 +332,54 @@
                     });
             });
         }
+    </script>
+
+    <!-- Password verification script (client-side) -->
+    <script>
+      // ===== CONFIGURE PASSWORD HERE =====
+      // Change this value to set the password (client-side only).
+      // NOTE: This is not secure for protecting sensitive content — anyone can view/edit it.
+      const PASSWORD = 'mySecret123'; // <-- set your desired password
+
+      const overlay = document.getElementById('captchaOverlay');
+      const input = document.getElementById('captchaPasswordInput');
+      const btn = document.getElementById('captchaConfirmBtn');
+      const msg = document.getElementById('captchaMessage');
+
+      function showMessage(text, show = true) {
+        if (!msg) return;
+        msg.textContent = text;
+        msg.style.display = show ? 'block' : 'none';
+      }
+
+      function verify() {
+        const val = input.value || '';
+        if (val === PASSWORD) {
+          showMessage('', false);
+          // Hide overlay on success
+          overlay.style.display = 'none';
+          // Optional: remember success for this session to avoid re-prompting
+          try { sessionStorage.setItem('sparx_auth', '1'); } catch (e) {}
+          // You can add custom success behavior here (navigate, enable UI, etc.)
+          // e.g., window.location.href = 'somepage.html';
+        } else {
+          showMessage('Access denied: incorrect password.');
+          input.value = '';
+          input.focus();
+        }
+      }
+
+      // If previously verified in this session, hide overlay
+      try {
+        if (sessionStorage.getItem('sparx_auth') === '1') {
+          overlay.style.display = 'none';
+        }
+      } catch (e) {}
+
+      if (btn) btn.addEventListener('click', verify);
+      if (input) input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') verify();
+      });
     </script>
 </body>
 </html>
