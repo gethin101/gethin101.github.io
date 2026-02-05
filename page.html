@@ -317,7 +317,9 @@
     </footer>
 
     <script src="script.js"></script>
+
     <script>
+        // Service worker registration (unchanged)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
@@ -334,8 +336,7 @@
     <!-- Password verification script (client-side) -->
     <script>
       // ===== CONFIGURE PASSWORD HERE =====
-      // Change this value to set the password (client-side only).
-      // NOTE: This is not secure for protecting sensitive content — anyone can view/edit it.
+      // NOTE: This is client-side only. It's not secure for protecting sensitive content.
       const PASSWORD = 'sameee'; // <-- set your desired password
 
       const overlay = document.getElementById('captchaOverlay');
@@ -354,11 +355,8 @@
         if (val === PASSWORD) {
           showMessage('', false);
           // Hide overlay on success
-          overlay.style.display = 'none';
-          // Optional: remember success for this session to avoid re-prompting
-          try { sessionStorage.setItem('sparx_auth', '1'); } catch (e) {}
-          // You can add custom success behavior here (navigate, enable UI, etc.)
-          // e.g., window.location.href = 'somepage.html';
+          if (overlay) overlay.style.display = 'none';
+          // Intentionally do NOT store a session flag so the overlay appears every page load
         } else {
           showMessage('Access denied: incorrect password.');
           input.value = '';
@@ -366,17 +364,40 @@
         }
       }
 
-      // If previously verified in this session, hide overlay
-      try {
-        if (sessionStorage.getItem('sparx_auth') === '1') {
-          overlay.style.display = 'none';
-        }
-      } catch (e) {}
+      // Ensure the overlay is visible on every page load.
+      // Use the display style that matches your CSS layout (block/flex). Adjust if needed.
+      if (overlay) {
+        // If your overlay CSS uses flex or grid, change to 'flex' accordingly.
+        overlay.style.display = 'flex';
+        // OPTIONAL: make sure the overlay covers the viewport even if CSS didn't
+        overlay.style.position = overlay.style.position || 'fixed';
+        overlay.style.top = overlay.style.top || '0';
+        overlay.style.left = overlay.style.left || '0';
+        overlay.style.width = overlay.style.width || '100%';
+        overlay.style.height = overlay.style.height || '100%';
+        overlay.style.zIndex = overlay.style.zIndex || '9999';
+        overlay.style.alignItems = overlay.style.alignItems || 'center';
+        overlay.style.justifyContent = overlay.style.justifyContent || 'center';
+      }
 
       if (btn) btn.addEventListener('click', verify);
       if (input) input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') verify();
       });
+    </script>
+
+    <!-- Optional developer-only snippet to clear service workers & caches while testing.
+         Remove this before publishing if you want the service worker to remain active. -->
+    <script>
+      // Uncomment to unregister service workers and clear caches (useful while testing page updates).
+      /*
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
+      }
+      if (window.caches) {
+        caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+      }
+      */
     </script>
 </body>
 </html>
