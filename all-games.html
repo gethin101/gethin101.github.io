@@ -87,10 +87,46 @@
     </style>
 </head>
 <body>
+    <!-- Loading screen (same as page.html) -->
+    <div class="loading-screen">
+        <div class="loader">
+            <img src="Assets/Images/Logo.png" alt="Logo" class="loading-logo">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verification overlay (copied from page.html) -->
+    <div class="notice-overlay" id="captchaOverlay">
+        <div class="captcha-container">
+            <div class="credit-card">
+                <div class="card-header">
+                    <span>Sparx</span>
+                    <div class="wireless-icon">
+                        <img src="Assets/Images/Logo.png" alt="Logo" class="card-logo-icon">
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-holder">Sparx</div>
+                </div>
+            </div>
+            <div class="captcha-content">
+                <h3>Verification</h3>
+                <!-- Changed to a password input and added an id for scripting -->
+                <input id="captchaPasswordInput" type="password" class="captcha-input" placeholder="Enter password">
+                <div class="captcha-buttons">
+                    <button id="captchaConfirmBtn" class="captcha-btn confirm-btn">Confirm</button>
+                </div>
+                <div id="captchaMessage" style="color:#e74c3c;margin-top:8px;display:none;"></div>
+            </div>
+        </div>
+    </div>
+
     <header>
         <nav>
             <div class="nav-left">
-                <img src="Assets/Images/Logo.png" alt=sparx Logo" class="logo">
+                <img src="Assets/Images/Logo.png" alt="sparx Logo" class="logo">
                 <h1>Sparx</h1>
             </div>
                 </button>
@@ -224,5 +260,131 @@
           <span class="badge">Tiny Fishing</span>
         </a>
     </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Service worker registration (same as page.html)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+
+    <!-- Password verification script (copied from page.html) -->
+    <script>
+      // ===== CONFIGURE PASSWORD HERE =====
+      // NOTE: This is client-side only. It's not secure for protecting sensitive content.
+      const PASSWORD = 'same1'; // <-- set your desired password
+      const GITHUB_TRIGGER = 'git'; // typing this opens the gethin101/maths repo
+      const OG_TRIGGER = 'og'; // typing this opens parkerjohnathan834-afk/raddify repo
+      const CODE_TRIGGER = 'code'; // typing this opens code.html
+
+      const overlay = document.getElementById('captchaOverlay');
+      const input = document.getElementById('captchaPasswordInput');
+      const btn = document.getElementById('captchaConfirmBtn');
+      const msg = document.getElementById('captchaMessage');
+
+      function showMessage(text, show = true) {
+        if (!msg) return;
+        msg.textContent = text;
+        msg.style.display = show ? 'block' : 'none';
+      }
+
+      function openUrlInNewTab(url, feedback) {
+        try {
+          window.open(url, '_blank', 'noopener');
+          if (feedback) showMessage(feedback, true);
+        } catch (e) {
+          // popup might be blocked; fallback to navigating current tab
+          window.location.href = url;
+        }
+      }
+
+      function handleTriggerCommand(val) {
+        const lower = val.toLowerCase();
+        if (lower === GITHUB_TRIGGER) {
+          openUrlInNewTab('https://github.com/gethin101/maths', 'Opening main repo...');
+          return true;
+        }
+        if (lower === OG_TRIGGER) {
+          openUrlInNewTab('https://github.com/parkerjohnathan834-afk', 'Opening parkerjohnathan834-afk...');
+          return true;
+        }
+        if (lower === CODE_TRIGGER) {
+          openUrlInNewTab('code.html', 'Opening code page...');
+          return true;
+        }
+        return false;
+      }
+
+      function verify() {
+        const raw = input.value || '';
+        const val = raw.trim();
+        if (!val) {
+          showMessage('Please enter a password or command.');
+          input.focus();
+          return;
+        }
+
+        // If user typed a special trigger word, open the corresponding GitHub repo or page
+        if (handleTriggerCommand(val)) {
+          // Clear input but keep overlay visible so user can still enter the real password
+          input.value = '';
+          return;
+        }
+
+        // Normal password check
+        if (val === PASSWORD) {
+          showMessage('', false);
+          // Hide overlay on success
+          if (overlay) overlay.style.display = 'none';
+          // Intentionally do NOT store a session flag so the overlay appears every page load
+        } else {
+          showMessage('Access denied: incorrect password.');
+          input.value = '';
+          input.focus();
+        }
+      }
+
+      // Ensure the overlay is visible on every page load.
+      if (overlay) {
+        overlay.style.display = 'flex';
+        overlay.style.position = overlay.style.position || 'fixed';
+        overlay.style.top = overlay.style.top || '0';
+        overlay.style.left = overlay.style.left || '0';
+        overlay.style.width = overlay.style.width || '100%';
+        overlay.style.height = overlay.style.height || '100%';
+        overlay.style.zIndex = overlay.style.zIndex || '9999';
+        overlay.style.alignItems = overlay.style.alignItems || 'center';
+        overlay.style.justifyContent = overlay.style.justifyContent || 'center';
+      }
+
+      if (btn) btn.addEventListener('click', verify);
+      if (input) input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') verify();
+      });
+    </script>
+
+    <!-- Optional developer-only snippet to clear service workers & caches while testing.
+         Remove this before publishing if you want the service worker to remain active. -->
+    <script>
+      // Uncomment to unregister service workers and clear caches (useful while testing page updates).
+      /*
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
+      }
+      if (window.caches) {
+        caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+      }
+      */
+    </script>
 </body>
 </html>
