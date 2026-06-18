@@ -15,7 +15,6 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -24,9 +23,9 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Welcome to My Portfolio</h1>
-                <p>Full-stack developer crafting elegant solutions</p>
-                <a href="#projects" class="cta-button">View My Work</a>
+                <h1>Crafting Digital Experiences</h1>
+                <p>Full-stack developer building elegant, modern solutions</p>
+                <a href="#projects" class="cta-button">Explore My Work</a>
             </div>
         </div>
     </section>
@@ -35,19 +34,58 @@
     <section id="about" class="about">
         <div class="container">
             <h2>About Me</h2>
-            <p>I'm a passionate developer with expertise in building modern web applications. I love creating clean, efficient code and beautiful user experiences.</p>
-            <div class="skills">
-                <div class="skill-item">
-                    <h3>Frontend</h3>
-                    <p>HTML, CSS, JavaScript, React</p>
+            <p>Passionate developer with expertise in creating beautiful, functional web applications. I combine clean code with thoughtful design to deliver exceptional digital experiences.</p>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Tech Stack</h3>
+                    <ul>
+                        <li>JavaScript / React</li>
+                        <li>Node.js / Python</li>
+                        <li>PostgreSQL / MongoDB</li>
+                        <li>AWS / Docker</li>
+                    </ul>
                 </div>
-                <div class="skill-item">
-                    <h3>Backend</h3>
-                    <p>Node.js, Python, Databases</p>
+                <div class="about-card">
+                    <h3>Skills</h3>
+                    <ul>
+                        <li>Full-Stack Development</li>
+                        <li>UI/UX Design</li>
+                        <li>Cloud Architecture</li>
+                        <li>Problem Solving</li>
+                    </ul>
                 </div>
-                <div class="skill-item">
-                    <h3>Tools</h3>
-                    <p>Git, GitHub, Docker, AWS</p>
+                <div class="about-card">
+                    <h3>Experience</h3>
+                    <ul>
+                        <li>5+ Years Development</li>
+                        <li>Led Cross-team Projects</li>
+                        <li>Open Source Contributor</li>
+                        <li>Tech Speaker</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tech Stack Carousel -->
+            <div class="tech-carousel-section">
+                <h3>Tools & Technologies</h3>
+                <div class="tech-carousel">
+                    <div class="tech-item">React</div>
+                    <div class="tech-item">Node.js</div>
+                    <div class="tech-item">JavaScript</div>
+                    <div class="tech-item">Python</div>
+                    <div class="tech-item">PostgreSQL</div>
+                    <div class="tech-item">MongoDB</div>
+                    <div class="tech-item">Docker</div>
+                    <div class="tech-item">AWS</div>
+                    <div class="tech-item">Git</div>
+                    <div class="tech-item">TypeScript</div>
+                    <!-- Duplicated for seamless loop -->
+                    <div class="tech-item">React</div>
+                    <div class="tech-item">Node.js</div>
+                    <div class="tech-item">JavaScript</div>
+                    <div class="tech-item">Python</div>
+                    <div class="tech-item">PostgreSQL</div>
                 </div>
             </div>
         </div>
@@ -58,38 +96,155 @@
         <div class="container">
             <h2>Featured Projects</h2>
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">Project One</div>
-                    <p>A brief description of your first project goes here. Highlight the technologies used and what you learned.</p>
-                    <a href="#" class="project-link">View Project →</a>
+                <!-- Project 1 -->
+                <div class="project-card" onclick="openProjectModal(1)">
+                    <div class="project-image-placeholder">
+                        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="250" fill="#001f3f"/>
+                            <text x="200" y="125" font-size="20" fill="#003d82" text-anchor="middle" dominant-baseline="middle">Project Image 1</text>
+                        </svg>
+                    </div>
+                    <div class="project-info">
+                        <h3>Project One</h3>
+                        <p>A revolutionary web application that transforms user engagement and drives measurable results.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">MongoDB</span>
+                        </div>
+                        <a href="https://github.com/gethin101" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-header">Project Two</div>
-                    <p>Description of your second project. What problem did it solve? What made it interesting?</p>
-                    <a href="#" class="project-link">View Project →</a>
+
+                <!-- Project 2 -->
+                <div class="project-card" onclick="openProjectModal(2)">
+                    <div class="project-image-placeholder">
+                        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="250" fill="#001f3f"/>
+                            <text x="200" y="125" font-size="20" fill="#003d82" text-anchor="middle" dominant-baseline="middle">Project Image 2</text>
+                        </svg>
+                    </div>
+                    <div class="project-info">
+                        <h3>Project Two</h3>
+                        <p>An intelligent system designed to streamline workflows and boost productivity across teams.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">React</span>
+                        </div>
+                        <a href="https://github.com/gethin101" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-header">Project Three</div>
-                    <p>Your third project description. Share the impact and key features you implemented.</p>
-                    <a href="#" class="project-link">View Project →</a>
+
+                <!-- Project 3 -->
+                <div class="project-card" onclick="openProjectModal(3)">
+                    <div class="project-image-placeholder">
+                        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="250" fill="#001f3f"/>
+                            <text x="200" y="125" font-size="20" fill="#003d82" text-anchor="middle" dominant-baseline="middle">Project Image 3</text>
+                        </svg>
+                    </div>
+                    <div class="project-info">
+                        <h3>Project Three</h3>
+                        <p>A cutting-edge platform combining AI and real-time analytics for actionable insights.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">TypeScript</span>
+                            <span class="tech-badge">AWS</span>
+                            <span class="tech-badge">Docker</span>
+                        </div>
+                        <a href="https://github.com/gethin101" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card" onclick="openProjectModal(4)">
+                    <div class="project-image-placeholder">
+                        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="250" fill="#001f3f"/>
+                            <text x="200" y="125" font-size="20" fill="#003d82" text-anchor="middle" dominant-baseline="middle">Project Image 4</text>
+                        </svg>
+                    </div>
+                    <div class="project-info">
+                        <h3>Project Four</h3>
+                        <p>An immersive experience that bridges the gap between design and functionality seamlessly.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Vue.js</span>
+                            <span class="tech-badge">Firebase</span>
+                            <span class="tech-badge">GraphQL</span>
+                        </div>
+                        <a href="https://github.com/gethin101" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <p>I'm always interested in hearing about new projects and opportunities.</p>
-            <div class="contact-links">
-                <a href="mailto:your.email@example.com" class="contact-link">Email</a>
-                <a href="https://github.com/gethin101" class="contact-link">GitHub</a>
-                <a href="https://linkedin.com/in/yourprofile" class="contact-link">LinkedIn</a>
-                <a href="https://twitter.com/yourhandle" class="contact-link">Twitter</a>
+    <!-- Project Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeProjectModal()">✕</button>
+            
+            <div class="modal-header">
+                <div class="modal-image-placeholder">
+                    <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="800" height="400" fill="#001f3f"/>
+                        <text x="400" y="200" font-size="32" fill="#003d82" text-anchor="middle" dominant-baseline="middle" id="modalImageText">Project Image</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <h2 id="modalTitle">Project Title</h2>
+                
+                <div class="modal-grid">
+                    <div class="modal-left">
+                        <h3>Overview</h3>
+                        <p id="modalDescription">Project description goes here. This is where you can dive deep into what the project is about, the problems it solves, and the impact it creates.</p>
+                        <p id="modalDetails">Additional details about the project, your role, and what you learned from building it.</p>
+                    </div>
+                    <div class="modal-right">
+                        <h3>Project Details</h3>
+                        <div class="detail-item">
+                            <strong>Tech Stack:</strong>
+                            <div id="modalTechStack" class="tech-stack"></div>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Role:</strong>
+                            <p id="modalRole">Full Stack Developer</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Timeline:</strong>
+                            <p id="modalTimeline">3 months</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-gallery">
+                    <h3>Project Gallery</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#001f3f"/>
+                                <text x="150" y="100" font-size="14" fill="#003d82" text-anchor="middle" dominant-baseline="middle">Screenshot 1</text>
+                            </svg>
+                        </div>
+                        <div class="gallery-item">
+                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#001f3f"/>
+                                <text x="150" y="100" font-size="14" fill="#003d82" text-anchor="middle" dominant-baseline="middle">Screenshot 2</text>
+                            </svg>
+                        </div>
+                        <div class="gallery-item">
+                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#001f3f"/>
+                                <text x="150" y="100" font-size="14" fill="#003d82" text-anchor="middle" dominant-baseline="middle">Screenshot 3</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -97,5 +252,7 @@
             <p>&copy; 2024 Gethin. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
