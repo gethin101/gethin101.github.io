@@ -1,3 +1,113 @@
+// Typewriter animation
+const typewriterElement = document.getElementById('typewriter');
+const typewriterText = 'Hi, I\'m Gethin';
+let typewriterIndex = 0;
+let isDeleting = false;
+
+function typewriter() {
+    if (!isDeleting && typewriterIndex < typewriterText.length) {
+        typewriterElement.textContent = typewriterText.substring(0, typewriterIndex + 1);
+        typewriterIndex++;
+        setTimeout(typewriter, 100);
+    } else if (isDeleting && typewriterIndex > 0) {
+        typewriterElement.textContent = typewriterText.substring(0, typewriterIndex - 1);
+        typewriterIndex--;
+        setTimeout(typewriter, 50);
+    } else if (!isDeleting && typewriterIndex === typewriterText.length) {
+        isDeleting = true;
+        setTimeout(typewriter, 2000);
+    } else if (isDeleting && typewriterIndex === 0) {
+        isDeleting = false;
+        setTimeout(typewriter, 500);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', typewriter);
+
+// Image carousel navigation
+let currentImageSlide = 0;
+
+function showImageSlide(index) {
+    const items = document.querySelectorAll('.carousel-image-item');
+    if (index >= items.length) {
+        currentImageSlide = 0;
+    } else if (index < 0) {
+        currentImageSlide = items.length - 1;
+    } else {
+        currentImageSlide = index;
+    }
+
+    const track = document.querySelector('.carousel-track');
+    track.style.transform = `translateX(-${currentImageSlide * 100}%)`;
+
+    items.forEach((item, i) => {
+        item.classList.toggle('active', i === currentImageSlide);
+    });
+}
+
+function nextImageSlide() {
+    showImageSlide(currentImageSlide + 1);
+}
+
+function prevImageSlide() {
+    showImageSlide(currentImageSlide - 1);
+}
+
+// Auto-scroll image carousel
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(() => {
+        nextImageSlide();
+    }, 5000);
+});
+
+// Change project carousel slide
+function changeCarouselSlide(e, direction, card) {
+    const slides = card.querySelectorAll('.carousel-slide');
+    const dots = card.querySelectorAll('.dot');
+    let currentIndex = 0;
+
+    // Find current active slide
+    slides.forEach((slide, index) => {
+        if (slide.classList.contains('active')) {
+            currentIndex = index;
+        }
+    });
+
+    // Calculate new index
+    let newIndex;
+    if (typeof direction === 'number' && direction >= 0 && direction < slides.length) {
+        newIndex = direction;
+    } else if (direction === -1) {
+        newIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+    } else if (direction === 1) {
+        newIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
+    }
+
+    // Update slides and dots
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === newIndex);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === newIndex);
+    });
+}
+
+// Change modal gallery slide
+function changeModalSlide(slideIndex) {
+    const modal = document.getElementById('projectModal');
+    const slides = modal.querySelectorAll('.modal-gallery-slide');
+    const dots = modal.querySelectorAll('.modal-gallery-dot');
+
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === slideIndex);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === slideIndex);
+    });
+}
+
 // Project data for modal
 const projectsData = {
     1: {
@@ -50,37 +160,11 @@ const projectsData = {
     }
 };
 
-// Change carousel slide
-function changeCarouselSlide(e, slideIndex) {
-    const carousel = e.target.closest('.project-image-carousel');
-    const slides = carousel.querySelectorAll('.carousel-slide');
-    const dots = carousel.querySelectorAll('.dot');
-    
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    slides[slideIndex].classList.add('active');
-    dots[slideIndex].classList.add('active');
-}
-
-// Change modal gallery slide
-function changeModalSlide(slideIndex) {
-    const modal = document.getElementById('projectModal');
-    const slides = modal.querySelectorAll('.modal-gallery-slide');
-    const dots = modal.querySelectorAll('.modal-gallery-dot');
-    
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    slides[slideIndex].classList.add('active');
-    dots[slideIndex].classList.add('active');
-}
-
 // Open project modal
 function openProjectModal(projectId) {
     const modal = document.getElementById('projectModal');
     const project = projectsData[projectId];
-    
+
     // Update modal content
     document.getElementById('modalTitle').textContent = project.title;
     document.getElementById('modalImageText').textContent = project.title;
@@ -88,7 +172,7 @@ function openProjectModal(projectId) {
     document.getElementById('modalDetails').textContent = project.details;
     document.getElementById('modalRole').textContent = project.role;
     document.getElementById('modalTimeline').textContent = project.timeline;
-    
+
     // Update tech stack
     const techStackContainer = document.getElementById('modalTechStack');
     techStackContainer.innerHTML = '';
@@ -98,7 +182,7 @@ function openProjectModal(projectId) {
         badge.textContent = tech;
         techStackContainer.appendChild(badge);
     });
-    
+
     // Reset gallery slides
     const slides = modal.querySelectorAll('.modal-gallery-slide');
     const dots = modal.querySelectorAll('.modal-gallery-dot');
@@ -108,7 +192,7 @@ function openProjectModal(projectId) {
     dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === 0);
     });
-    
+
     // Show modal with animation
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -121,20 +205,44 @@ function closeProjectModal() {
     document.body.style.overflow = 'auto';
 }
 
-// Close modal when clicking outside
+// Open gallery image popup
+function openGalleryImage(index) {
+    const popup = document.getElementById('galleryPopup');
+    const screenshotNumbers = ['Screenshot 1', 'Screenshot 2', 'Screenshot 3'];
+    document.getElementById('popupImageText').textContent = screenshotNumbers[index] || 'Screenshot';
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close gallery image popup
+function closeGalleryImage() {
+    const popup = document.getElementById('galleryPopup');
+    popup.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modals when clicking outside
 document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('projectModal');
-    
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
+    const projectModal = document.getElementById('projectModal');
+    const galleryPopup = document.getElementById('galleryPopup');
+
+    projectModal.addEventListener('click', (e) => {
+        if (e.target === projectModal) {
             closeProjectModal();
         }
     });
-    
-    // Close modal with Escape key
+
+    galleryPopup.addEventListener('click', (e) => {
+        if (e.target === galleryPopup) {
+            closeGalleryImage();
+        }
+    });
+
+    // Close modals with Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeProjectModal();
+            closeGalleryImage();
         }
     });
 });
