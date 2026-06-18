@@ -10,7 +10,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Gethin</div>
+            <a href="#home" class="logo">Gethin</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -23,7 +23,7 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Building Digital Experiences</h1>
+                <h1 id="typewriter">Hi, I'm Gethin</h1>
                 <p>Crafting clean, modern web applications with elegant code and thoughtful design</p>
                 <a href="#projects" class="cta-button">View My Work</a>
             </div>
@@ -68,6 +68,55 @@
         </div>
     </section>
 
+    <!-- Image Carousel Section -->
+    <section class="image-carousel-section">
+        <div class="container">
+            <div class="carousel-wrapper">
+                <button class="carousel-arrow left-arrow" onclick="prevImageSlide()">‹</button>
+                <div class="image-carousel">
+                    <div class="carousel-track">
+                        <div class="carousel-image-item active">
+                            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="#0a0e27"/>
+                                <rect width="400" height="300" fill="#0066cc" opacity="0.08"/>
+                                <text x="200" y="150" font-size="20" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Gallery Image 1</text>
+                            </svg>
+                        </div>
+                        <div class="carousel-image-item">
+                            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="#0a0e27"/>
+                                <rect width="400" height="300" fill="#0066cc" opacity="0.1"/>
+                                <text x="200" y="150" font-size="20" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Gallery Image 2</text>
+                            </svg>
+                        </div>
+                        <div class="carousel-image-item">
+                            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="#0a0e27"/>
+                                <rect width="400" height="300" fill="#0066cc" opacity="0.12"/>
+                                <text x="200" y="150" font-size="20" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Gallery Image 3</text>
+                            </svg>
+                        </div>
+                        <div class="carousel-image-item">
+                            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="#0a0e27"/>
+                                <rect width="400" height="300" fill="#0066cc" opacity="0.14"/>
+                                <text x="200" y="150" font-size="20" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Gallery Image 4</text>
+                            </svg>
+                        </div>
+                        <div class="carousel-image-item">
+                            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="#0a0e27"/>
+                                <rect width="400" height="300" fill="#0066cc" opacity="0.16"/>
+                                <text x="200" y="150" font-size="20" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Gallery Image 5</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-arrow right-arrow" onclick="nextImageSlide()">›</button>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
@@ -99,10 +148,14 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="carousel-dots">
-                            <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2)"></div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
                         </div>
                     </div>
                     <div class="project-info">
@@ -143,10 +196,14 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="carousel-dots">
-                            <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2)"></div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
                         </div>
                     </div>
                     <div class="project-info">
@@ -187,10 +244,14 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="carousel-dots">
-                            <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2)"></div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
                         </div>
                     </div>
                     <div class="project-info">
@@ -231,10 +292,14 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="carousel-dots">
-                            <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2)"></div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
                         </div>
                     </div>
                     <div class="project-info">
@@ -275,10 +340,14 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="carousel-dots">
-                            <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2)"></div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
                         </div>
                     </div>
                     <div class="project-info">
@@ -319,10 +388,14 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="carousel-dots">
-                            <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1)"></div>
-                            <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2)"></div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
                         </div>
                     </div>
                     <div class="project-info">
@@ -407,21 +480,21 @@
                 <div class="modal-gallery">
                     <h3>Project Gallery</h3>
                     <div class="gallery-grid">
-                        <div class="gallery-item">
+                        <div class="gallery-item" onclick="event.stopPropagation(); openGalleryImage(0)">
                             <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="300" height="200" fill="#0a0e27"/>
                                 <rect width="300" height="200" fill="#0066cc" opacity="0.1"/>
                                 <text x="150" y="100" font-size="12" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Screenshot 1</text>
                             </svg>
                         </div>
-                        <div class="gallery-item">
+                        <div class="gallery-item" onclick="event.stopPropagation(); openGalleryImage(1)">
                             <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="300" height="200" fill="#0a0e27"/>
                                 <rect width="300" height="200" fill="#0066cc" opacity="0.15"/>
                                 <text x="150" y="100" font-size="12" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Screenshot 2</text>
                             </svg>
                         </div>
-                        <div class="gallery-item">
+                        <div class="gallery-item" onclick="event.stopPropagation(); openGalleryImage(2)">
                             <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="300" height="200" fill="#0a0e27"/>
                                 <rect width="300" height="200" fill="#0066cc" opacity="0.2"/>
@@ -431,6 +504,18 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Gallery Image Popup -->
+    <div id="galleryPopup" class="gallery-popup">
+        <button class="popup-close" onclick="closeGalleryImage()">✕</button>
+        <div class="popup-image">
+            <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+                <rect width="600" height="500" fill="#0a0e27"/>
+                <rect width="600" height="500" fill="#0066cc" opacity="0.1"/>
+                <text x="300" y="250" font-size="24" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500" id="popupImageText">Screenshot</text>
+            </svg>
         </div>
     </div>
 
