@@ -1,6 +1,6 @@
 # Gethin Portfolio
 
-A clean, modern portfolio site built with HTML, CSS, and vanilla JavaScript.
+A clean, modern portfolio site built with HTML, CSS, and Jvascript and using a custom domain name.
 
 ## License
 
