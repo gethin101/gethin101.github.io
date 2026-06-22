@@ -277,10 +277,15 @@ body {
     border-radius: 8px;
     border: 1px solid var(--border-color);
     background: linear-gradient(135deg, var(--secondary-black) 0%, rgba(0, 102, 204, 0.05) 100%);
-    aspect-ratio: 1 / 1;
-    height: auto;
-    max-height: 400px;
+    
+    /* FIXED: taller carousel instead of square */
+    height: 420px;
 }
+
+@media (max-width: 768px) {
+    .image-carousel {
+        height: 320px;
+    }
 }
 
 .carousel-track {
@@ -299,14 +304,13 @@ body {
     transition: opacity 0.5s ease;
 }
 
-
+/* FIX: ensures full image is visible (no weird cropping) */
 .carousel-image-item img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
 }
-
 
 .carousel-image-item.active {
     opacity: 1;
