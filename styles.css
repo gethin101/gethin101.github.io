@@ -296,6 +296,15 @@ body {
     transition: opacity 0.5s ease;
 }
 
+
+.carousel-image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
 .carousel-image-item.active {
     opacity: 1;
 }
