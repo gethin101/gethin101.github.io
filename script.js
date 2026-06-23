@@ -1,51 +1,45 @@
-// ============================
-// TYPEWRITER
-// ============================
+// Typewriter animation
 const typewriterElement = document.getElementById('typewriter');
-const typewriterText = "Hi, I'm Gethin";
+const typewriterText = 'Hi, I\'m Gethin';
 let typewriterIndex = 0;
 let isDeleting = false;
 
 function typewriter() {
-    if (!typewriterElement) return;
-
     if (!isDeleting && typewriterIndex < typewriterText.length) {
         typewriterElement.textContent = typewriterText.substring(0, typewriterIndex + 1);
         typewriterIndex++;
         setTimeout(typewriter, 100);
-
     } else if (isDeleting && typewriterIndex > 0) {
         typewriterElement.textContent = typewriterText.substring(0, typewriterIndex - 1);
         typewriterIndex--;
         setTimeout(typewriter, 50);
-
     } else if (!isDeleting && typewriterIndex === typewriterText.length) {
         isDeleting = true;
         setTimeout(typewriter, 2000);
-
     } else if (isDeleting && typewriterIndex === 0) {
         isDeleting = false;
         setTimeout(typewriter, 500);
     }
 }
 
-document.addEventListener("DOMContentLoaded", typewriter);
+document.addEventListener('DOMContentLoaded', typewriter);
 
 
-
-// ============================
-// IMAGE CAROUSEL (HERO)
-// ============================
+// Image carousel navigation
 let currentImageSlide = 0;
 
 function showImageSlide(index) {
     const items = document.querySelectorAll('.carousel-image-item');
+
+    if (index >= items.length) {
+        currentImageSlide = 0;
+    } else if (index < 0) {
+        currentImageSlide = items.length - 1;
+    } else {
+        currentImageSlide = index;
+    }
+
     const track = document.querySelector('.carousel-track');
-
-    if (!items.length || !track) return;
-
-    currentImageSlide = (index + items.length) % items.length;
-
     track.style.transform = `translateX(-${currentImageSlide * 100}%)`;
 
     items.forEach((item, i) => {
@@ -61,130 +55,225 @@ function prevImageSlide() {
     showImageSlide(currentImageSlide - 1);
 }
 
-// autoplay hero carousel
-document.addEventListener("DOMContentLoaded", () => {
-    setInterval(nextImageSlide, 5000);
+
+// Auto-scroll image carousel
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(() => {
+        nextImageSlide();
+    }, 5000);
 });
 
 
+// Change project carousel slide
+function changeCarouselSlide(e, direction, card) {
+    const slides = card.querySelectorAll('.carousel-slide');
+    const dots = card.querySelectorAll('.dot');
 
-// ============================
-// PROJECT CAROUSEL (FIXED LOOP)
-// ============================
-function changeCarouselSlide(e, dir, card) {
-    const slides = card.querySelectorAll(".carousel-slide");
-    const dots = card.querySelectorAll(".dot");
+    let currentIndex = 0;
 
-    let index = [...slides].findIndex(s => s.classList.contains("active"));
-
-    // FIXED LOOP LOGIC (1→2→3→1 and reverse)
-    index = (index + dir + slides.length) % slides.length;
-
-    slides.forEach((s, i) => {
-        s.classList.toggle("active", i === index);
+    slides.forEach((slide, index) => {
+        if (slide.classList.contains('active')) {
+            currentIndex = index;
+        }
     });
 
-    dots.forEach((d, i) => {
-        d.classList.toggle("active", i === index);
-    });
-}
+    let newIndex;
 
-
-
-// ============================
-// MODAL IMAGE SYSTEM (REAL IMAGES)
-// ============================
-const projectImages = {
-    1: ["assets/projects/hackpad/1.jpg","assets/projects/hackpad/2.jpg","assets/projects/hackpad/3.jpg"],
-    2: ["assets/projects/robot/1.jpg","assets/projects/robot/2.jpg","assets/projects/robot/3.jpg"],
-    3: ["assets/projects/keyboard/1.jpg","assets/projects/keyboard/2.jpg","assets/projects/keyboard/3.jpg"],
-    4: ["assets/projects/ghost/1.jpg","assets/projects/ghost/2.jpg","assets/projects/ghost/3.jpg"],
-    5: ["assets/projects/camera/1.jpg","assets/projects/camera/2.jpg","assets/projects/camera/3.jpg"],
-    6: ["assets/projects/blinky/1.jpg","assets/projects/blinky/2.jpg","assets/projects/blinky/3.jpg"]
-};
-
-function openProjectModal(projectId) {
-    const modal = document.getElementById("projectModal");
-
-    const imgs = projectImages[projectId];
-    if (!imgs) return;
-
-    document.getElementById("modalImg1").src = imgs[0];
-    document.getElementById("modalImg2").src = imgs[1];
-    document.getElementById("modalImg3").src = imgs[2];
-
-    changeModalSlide(0);
-
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden";
-}
-
-function closeProjectModal() {
-    const modal = document.getElementById("projectModal");
-    modal.classList.remove("active");
-    document.body.style.overflow = "auto";
-}
-
-
-
-// ============================
-// MODAL SLIDES
-// ============================
-function changeModalSlide(slideIndex) {
-    const modal = document.getElementById("projectModal");
-    if (!modal) return;
-
-    const slides = modal.querySelectorAll(".modal-gallery-slide");
-    const dots = modal.querySelectorAll(".modal-gallery-dot");
-
-    slides.forEach((s, i) => {
-        s.classList.toggle("active", i === slideIndex);
-    });
-
-    dots.forEach((d, i) => {
-        d.classList.toggle("active", i === slideIndex);
-    });
-}
-
-
-
-// ============================
-// CLICK OUTSIDE TO CLOSE
-// ============================
-document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("projectModal");
-
-    if (modal) {
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) closeProjectModal();
-        });
+    if (typeof direction === 'number' && direction >= 0 && direction < slides.length) {
+        newIndex = direction;
+    } else if (direction === -1) {
+        newIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+    } else if (direction === 1) {
+        newIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
     }
 
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeProjectModal();
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === newIndex);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === newIndex);
+    });
+}
+
+
+// Change modal gallery slide
+function changeModalSlide(slideIndex) {
+    const modal = document.getElementById('projectModal');
+    const slides = modal.querySelectorAll('.modal-gallery-slide');
+    const dots = modal.querySelectorAll('.modal-gallery-dot');
+
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === slideIndex);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === slideIndex);
+    });
+}
+
+
+// Project data for modal
+const projectsData = {
+    1: {
+        title: 'Project One',
+        description: 'A revolutionary web application that transforms user engagement.',
+        details: 'Built from scratch with full stack architecture.',
+        techStack: ['React', 'Node.js', 'MongoDB'],
+        role: 'Full Stack Developer',
+        timeline: '3 months'
+    },
+    2: {
+        title: 'Project Two',
+        description: 'Workflow automation system.',
+        details: 'Improves efficiency and reduces manual work.',
+        techStack: ['Python', 'PostgreSQL', 'Django'],
+        role: 'Lead Developer',
+        timeline: '4 months'
+    },
+    3: {
+        title: 'Project Three',
+        description: 'AI analytics platform.',
+        details: 'Processes large datasets in real time.',
+        techStack: ['TypeScript', 'AWS', 'TensorFlow'],
+        role: 'Full Stack Developer',
+        timeline: '5 months'
+    },
+    4: {
+        title: 'Project Four',
+        description: 'UI/UX focused web app.',
+        details: 'Smooth animations and responsive design.',
+        techStack: ['Vue', 'Firebase', 'GraphQL'],
+        role: 'Frontend Lead',
+        timeline: '2 months'
+    },
+    5: {
+        title: 'Project Five',
+        description: 'Enterprise scalable system.',
+        details: 'High performance and modular architecture.',
+        techStack: ['Next.js', 'Prisma', 'PostgreSQL'],
+        role: 'Full Stack Developer',
+        timeline: '6 months'
+    },
+    6: {
+        title: 'Project Six',
+        description: 'Mobile-first PWA.',
+        details: 'Offline support and high performance.',
+        techStack: ['React Native', 'Redux', 'Firebase'],
+        role: 'Frontend Lead',
+        timeline: '3 months'
+    }
+};
+
+
+// Open project modal
+function openProjectModal(projectId) {
+    const modal = document.getElementById('projectModal');
+    const project = projectsData[projectId];
+
+    document.getElementById('modalTitle').textContent = project.title;
+    document.getElementById('modalDescription').textContent = project.description;
+    document.getElementById('modalDetails').textContent = project.details;
+    document.getElementById('modalRole').textContent = project.role;
+    document.getElementById('modalTimeline').textContent = project.timeline;
+
+    const techStackContainer = document.getElementById('modalTechStack');
+    techStackContainer.innerHTML = '';
+
+    project.techStack.forEach(tech => {
+        const badge = document.createElement('span');
+        badge.className = 'tech-badge';
+        badge.textContent = tech;
+        techStackContainer.appendChild(badge);
+    });
+
+    const slides = modal.querySelectorAll('.modal-gallery-slide');
+    const dots = modal.querySelectorAll('.modal-gallery-dot');
+
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === 0);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === 0);
+    });
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+
+// Close modal
+function closeProjectModal() {
+    const modal = document.getElementById('projectModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+
+// Gallery popup
+function openGalleryImage(index) {
+    const popup = document.getElementById('galleryPopup');
+    const screenshotNumbers = ['Screenshot 1', 'Screenshot 2', 'Screenshot 3'];
+
+    document.getElementById('popupImageText').textContent =
+        screenshotNumbers[index] || 'Screenshot';
+
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGalleryImage() {
+    const popup = document.getElementById('galleryPopup');
+    popup.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+
+// Close modals when clicking outside + ESC
+document.addEventListener('DOMContentLoaded', () => {
+    const projectModal = document.getElementById('projectModal');
+    const galleryPopup = document.getElementById('galleryPopup');
+
+    projectModal.addEventListener('click', (e) => {
+        if (e.target === projectModal) closeProjectModal();
+    });
+
+    galleryPopup.addEventListener('click', (e) => {
+        if (e.target === galleryPopup) closeGalleryImage();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeProjectModal();
+            closeGalleryImage();
+        }
     });
 });
 
 
+// Scroll animation observer
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
 
-// ============================
-// SCROLL ANIMATION
-// ============================
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.animation = "fadeInUp 0.6s ease forwards";
+            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
             observer.unobserve(entry.target);
         }
     });
-}, {
-    threshold: 0.1,
-    rootMargin: "0px 0px -100px 0px"
-});
+}, observerOptions);
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".project-card, .about-card").forEach(card => {
-        card.style.opacity = "0";
+
+// Observe cards
+document.addEventListener('DOMContentLoaded', () => {
+    const projectCards = document.querySelectorAll('.project-card, .about-card');
+
+    projectCards.forEach(card => {
+        card.style.opacity = '0';
         observer.observe(card);
     });
 });
