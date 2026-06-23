@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Files | Gethin's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .files-section {
+            padding: 80px 20px;
+        }
+
+        .files-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-white);
+        }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .file-card {
+            background: linear-gradient(
+                135deg,
+                var(--secondary-black) 0%,
+                rgba(0, 102, 204, 0.05) 100%
+            );
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .file-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: var(--shadow-lg), var(--glow-blue);
+        }
+
+        .file-card h3 {
+            color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+
+        .file-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: 2px solid var(--accent-blue);
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: transparent;
+            color: var(--accent-blue);
+        }
+
+        .section-divider {
+            margin: 60px 0;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Gethin</a>
+
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="files.html">Files</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Files & Downloads</h1>
+                <p>
+                    Documentation, CAD files, firmware, reports,
+                    resources and downloadable project files.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Files -->
+    <section class="files-section">
+        <div class="container">
+
+            <!-- Documentation -->
+            <h2>Documentation</h2>
+
+            <div class="files-grid">
+
+                <div class="file-card">
+                    <h3>Hackpad Build Guide</h3>
+                    <p>Assembly guide and documentation for Gethin Hackpad v1.</p>
+                    <span class="tech-badge">PDF</span>
+                    <br><br>
+                    <a href="files/hackpad-guide.pdf" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+                <div class="file-card">
+                    <h3>GG Battle Robot Report</h3>
+                    <p>Development notes, testing results and design process.</p>
+                    <span class="tech-badge">PDF</span>
+                    <br><br>
+                    <a href="files/battle-robot-report.pdf" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+                <div class="file-card">
+                    <h3>Gethin-75 Documentation</h3>
+                    <p>Keyboard design, firmware setup and assembly guide.</p>
+                    <span class="tech-badge">PDF</span>
+                    <br><br>
+                    <a href="files/gethin75-docs.pdf" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- CAD Files -->
+            <h2>CAD Files</h2>
+
+            <div class="files-grid">
+
+                <div class="file-card">
+                    <h3>Hackpad Case STL</h3>
+                    <p>3D printable enclosure files for Hackpad v1.</p>
+                    <span class="tech-badge">STL</span>
+                    <br><br>
+                    <a href="files/hackpad-case.stl" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+                <div class="file-card">
+                    <h3>Battle Robot Chassis</h3>
+                    <p>Fusion 360 export of the robot chassis design.</p>
+                    <span class="tech-badge">STEP</span>
+                    <br><br>
+                    <a href="files/battle-robot.step" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+                <div class="file-card">
+                    <h3>Gethin-75 Keyboard Case</h3>
+                    <p>Printable keyboard enclosure and mounting files.</p>
+                    <span class="tech-badge">STL</span>
+                    <br><br>
+                    <a href="files/gethin75-case.stl" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Firmware -->
+            <h2>Firmware & Code</h2>
+
+            <div class="files-grid">
+
+                <div class="file-card">
+                    <h3>Hackpad Firmware</h3>
+                    <p>CircuitPython firmware package and source code.</p>
+                    <span class="tech-badge">ZIP</span>
+                    <br><br>
+                    <a href="files/hackpad-firmware.zip" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+                <div class="file-card">
+                    <h3>Robot Controller Code</h3>
+                    <p>MicroPython WiFi control system source code.</p>
+                    <span class="tech-badge">ZIP</span>
+                    <br><br>
+                    <a href="files/robot-controller.zip" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+                <div class="file-card">
+                    <h3>Keyboard Firmware</h3>
+                    <p>KMK firmware configuration files.</p>
+                    <span class="tech-badge">ZIP</span>
+                    <br><br>
+                    <a href="files/gethin75-firmware.zip" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Resources -->
+            <h2>Resources</h2>
+
+            <div class="files-grid">
+
+                <div class="file-card">
+                    <h3>Electronics Cheat Sheet</h3>
+                    <p>Quick reference for common electronics calculations.</p>
+                    <span class="tech-badge">PDF</span>
+                    <br><br>
+                    <a href="files/electronics-cheatsheet.pdf" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+                <div class="file-card">
+                    <h3>PCB Design Notes</h3>
+                    <p>Personal PCB design workflow and best practices.</p>
+                    <span class="tech-badge">PDF</span>
+                    <br><br>
+                    <a href="files/pcb-design-notes.pdf" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+                <div class="file-card">
+                    <h3>Project Templates</h3>
+                    <p>Markdown templates for documenting projects.</p>
+                    <span class="tech-badge">ZIP</span>
+                    <br><br>
+                    <a href="files/project-templates.zip" download class="download-btn">
+                        Download
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Gethin. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
