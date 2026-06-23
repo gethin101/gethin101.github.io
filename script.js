@@ -1,6 +1,7 @@
 // Typewriter animation
 const typewriterElement = document.getElementById('typewriter');
 const typewriterText = 'Hi, I\'m Gethin';
+
 let typewriterIndex = 0;
 let isDeleting = false;
 
