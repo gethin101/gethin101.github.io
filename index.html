@@ -7,181 +7,523 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<!-- NAV -->
-<nav class="navbar">
-    <div class="container">
-        <a href="#home" class="logo">Gethin</a>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-        </ul>
-    </div>
-</nav>
-
-<!-- HERO -->
-<section id="home" class="hero">
-    <div class="container">
-        <div class="hero-content">
-            <h1 id="typewriter">Hi, I'm Gethin</h1>
-            <p>Creating clean, detailed projects with thoughtful and hard-worked designs</p>
-            <a href="#projects" class="cta-button">View My Work</a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#home" class="logo">Gethin</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
         </div>
-    </div>
-</section>
+    </nav>
 
-<!-- ABOUT -->
-<section id="about" class="about">
-    <div class="container">
-        <h2>About Me</h2>
-        <p>
-            I'm a passionate teen engineer focused on programming, embedded electronics and 3D printing.
-        </p>
-
-        <div class="about-grid">
-
-            <div class="about-card">
-                <h3>Web Development</h3>
-                <ul>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>Vanilla JavaScript</li>
-                    <li>GitHub Pages</li>
-                    <li>Responsive Design</li>
-                    <li>DNS Registration</li>
-                </ul>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 id="typewriter">Hi, I'm Gethin</h1>
+                <p>Creating clean, detailed projects with thoughtful and hard-worked designs</p>
+                <a href="#projects" class="cta-button">View My Work</a>
             </div>
-
-            <div class="about-card">
-                <h3>Maker Skills</h3>
-                <ul>
-                    <li>CAD & 3D Printing</li>
-                    <li>PCB Design</li>
-                    <li>Soldering & Circuit Assembly</li>
-                    <li>Arduino, Raspberry Pi & ESP32</li>
-                    <li>Laser Cutting</li>
-                </ul>
-            </div>
-
-            <div class="about-card">
-                <h3>Software</h3>
-                <ul>
-                    <li>Python</li>
-                    <li>Git / GitHub</li>
-                    <li>KiCad & Fusion360</li>
-                    <li>VS Code</li>
-                </ul>
-            </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="projects">
-    <div class="container">
-        <h2>Featured Projects</h2>
-
-        <div class="projects-grid">
-
-            <!-- PROJECT 1 -->
-            <div class="project-card" onclick="openProjectModal(this)">
-                <div class="project-info">
-                    <h3>Gethin Hackpad v1</h3>
-                    <p>3x3 macropad with OLED display and RP2040 microcontroller</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">KiCad</span>
-                        <span class="tech-badge">CircuitPython</span>
-                        <span class="tech-badge">Fusion360</span>
-                    </div>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>I'm a passionate teen engineer focused on programming, embedded electronics and 3D printing. I am learning multiple programming languages and becoming experienced with different modern softwares that are used in the real world.</p>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Web Development</h3>
+                    <ul>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>Vanilla JavaScript</li>
+                        <li>GitHub Pages</li>
+                        <li>Responsive Design</li>
+                        <li>DNS Registration</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <h3>Maker Skills</h3>
+                    <ul>
+                        <li>CAD & 3D Printing</li>
+                        <li>PCB Design</li>
+                        <li>Soldering & Circuit Assembly</li>
+                        <li>Mechanical prototyping</li>
+                        <li>Arduino, Raspberry Pi & ESP32</li>
+                        <li>Laser Cutting & Pewter Casting</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <h3>Software</h3>
+                    <ul>
+                        <li>Python / Terminal</li>
+                        <li>Markdown & Documentation</li>
+                        <li>Git / GitHub</li>
+                        <li>KiCad & Fusion360</li>
+                        <li>VS Code & CircuitPython</li>
+                        <li>Thonny & Arduino IDE</li>
+                    </ul>
                 </div>
             </div>
-
-            <!-- PROJECT 2 -->
-            <div class="project-card" onclick="openProjectModal(this)">
-                <div class="project-info">
-                    <h3>GG Battle Robot</h3>
-                    <p>Combat robot with servo axe and Pi Pico control</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">MicroPython</span>
-                        <span class="tech-badge">Fusion360</span>
-                        <span class="tech-badge">KiCad</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PROJECT 3 -->
-            <div class="project-card" onclick="openProjectModal(this)">
-                <div class="project-info">
-                    <h3>Gethin-75 Keyboard</h3>
-                    <p>Custom 75% mechanical keyboard with macro layer</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">KiCad</span>
-                        <span class="tech-badge">CircuitPython</span>
-                        <span class="tech-badge">Fusion360</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PROJECT 4 -->
-            <div class="project-card" onclick="openProjectModal(this)">
-                <div class="project-info">
-                    <h3>Ghost One</h3>
-                    <p>Pentesting multi-tool device with ESP32</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">ESP32</span>
-                        <span class="tech-badge">KiCad</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PROJECT 5 -->
-            <div class="project-card" onclick="openProjectModal(this)">
-                <div class="project-info">
-                    <h3>A1 Mini Camera System</h3>
-                    <p>3D printer timelapse camera system</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Fusion360</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PROJECT 6 -->
-            <div class="project-card" onclick="openProjectModal(this)">
-                <div class="project-info">
-                    <h3>IC 555 Blinky</h3>
-                    <p>Classic 555 timer LED flasher circuit</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">KiCad</span>
-                        <span class="tech-badge">PCB</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- MODAL -->
-<div id="projectModal" class="project-modal">
-    <div class="modal-content">
-        <button class="close-btn" onclick="closeProjectModal()">✕</button>
 
-        <h2 id="modalTitle"></h2>
-        <p id="modalDescription"></p>
-        <p id="modalDetails"></p>
+    <!-- Image Carousel Section -->
+    <section class="image-carousel-section">
+        <div class="container">
+            <div class="carousel-wrapper">
+                <button class="carousel-arrow left-arrow" onclick="prevImageSlide()">‹</button>
+                <div class="image-carousel">
+                    <div class="carousel-track">
 
-        <div id="modalTechStack" class="tech-stack"></div>
-    </div>
+<div class="carousel-image-item">
+    <img src="assets/gallery/gallery5.png" alt="Project photo 5">
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p>© 2026 Gethin</p>
-</footer>
+<div class="carousel-image-item">
+    <img src="assets/gallery/gallery3.jpeg" alt="Project photo 3">
+</div>
 
-<script src="script.js"></script>
+ <div class="carousel-image-item active">
+    <img src="assets/gallery/gallery1.jpeg" alt="Project photo 1">
+</div>
+
+                        
+<div class="carousel-image-item">
+    <img src="assets/gallery/gallery2.png" alt="Project photo 2">
+</div>
+
+
+
+<div class="carousel-image-item">
+    <img src="assets/gallery/gallery4.png" alt="Project photo 4">
+</div>
+
+
+                    </div>
+                </div>
+                <button class="carousel-arrow right-arrow" onclick="nextImageSlide()">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card" onclick="openProjectModal(1)">
+                    <div class="project-image-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.1"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 1 - Image 1</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.15"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 1 - Image 2</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.2"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 1 - Image 3</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Gethin Hackpad v1</h3>
+                        <p>A 3x3 Cherry MX Key switch macropad for computer shortcuts powered by a Seeed Xiao RP2040 microcontroller with a 0.91" OLED display</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-badge">KiCad</span>
+                            <span class="tech-badge">CircuitPython</span>
+                            <span class="tech-badge">Fusion360</span>
+                        </div>
+                        <a href="https://github.com/gethin101/hackpad_2025" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card" onclick="openProjectModal(2)">
+                    <div class="project-image-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.1"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 2 - Image 1</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.15"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 2 - Image 2</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.2"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 2 - Image 3</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>GG Battle Robot</h3>
+                        <p>A custom robot-wars inspired combat robot with a servo-driven axe weapon & raspberry pi pico WiFi access point control</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Micropython</span>
+                            <span class="tech-badge">Fusion360</span>
+                            <span class="tech-badge">KiCad</span>
+                        </div>
+                        <a href="https://github.com/gethin101/GG-Battle-robot" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card" onclick="openProjectModal(3)">
+                    <div class="project-image-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.1"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 3 - Image 1</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.15"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 3 - Image 2</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.2"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 3 - Image 3</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Gethin-75</h3>
+                        <p>A custom 75% mechanical keyboard with macro keys powered by a raspberry pi pico and KMK CircuitPython firmware<p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">KiCad</span>
+                            <span class="tech-badge">Fusion360</span>
+                            <span class="tech-badge">CircuitPython</span>
+                        </div>
+                        <a href="https://github.com/gethin101/Gethin-75" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card" onclick="openProjectModal(4)">
+                    <div class="project-image-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.1"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 4 - Image 1</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.15"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 4 - Image 2</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.2"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 4 - Image 3</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Ghost One</h3>
+                        <p>A custom flipper-inspired pentesting & access control system multi-tool device</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">ESP32</span>
+                            <span class="tech-badge">HAK5 Payloads</span>
+                            <span class="tech-badge">KiCad</span>
+                        </div>
+                        <a href="https://github.com/gethin101/GhostOne" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card" onclick="openProjectModal(5)">
+                    <div class="project-image-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.1"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 5 - Image 1</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.15"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 5 - Image 2</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.2"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 5 - Image 3</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>A1 Mini Camera System</h3>
+                        <p>External camera system designed for smoother timelapses with the Bambu Lab's A1 Mini 3D printer</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">G-CODE</span>
+                            <span class="tech-badge">Fusion360</span>
+                            <span class="tech-badge">Python</span>
+                        </div>
+                        <a href="https://github.com/gethin101/A1-mini-camera-system" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card" onclick="openProjectModal(6)">
+                    <div class="project-image-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.1"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 6 - Image 1</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.15"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 6 - Image 2</text>
+                                </svg>
+                            </div>
+                            <div class="carousel-slide">
+                                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="250" fill="#0a0e27"/>
+                                    <rect width="400" height="250" fill="#0066cc" opacity="0.2"/>
+                                    <text x="200" y="125" font-size="18" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project 6 - Image 3</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>IC 555 Blinky</h3>
+                        <p>An astable LED circuit board blinker with a 555 timer</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">KiCad</span>
+                            <span class="tech-badge">JLCPCB</span>
+                            <span class="tech-badge">HackClub</span>
+                        </div>
+                        <a href="https://github.com/gethin101/Gethin-blinky" class="github-link" onclick="event.stopPropagation()">View on GitHub →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeProjectModal()">✕</button>
+            
+            <div class="modal-header">
+                <div class="modal-image-gallery">
+                    <div class="carousel-container">
+                        <div class="modal-gallery-slide active">
+                            <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="800" height="400" fill="#0a0e27"/>
+                                <rect width="800" height="400" fill="#0066cc" opacity="0.1"/>
+                                <text x="400" y="200" font-size="28" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" id="modalImageText" font-weight="500">Project Image</text>
+                            </svg>
+                        </div>
+                        <div class="modal-gallery-slide">
+                            <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="800" height="400" fill="#0a0e27"/>
+                                <rect width="800" height="400" fill="#0066cc" opacity="0.15"/>
+                                <text x="400" y="200" font-size="28" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project Showcase</text>
+                            </svg>
+                        </div>
+                        <div class="modal-gallery-slide">
+                            <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="800" height="400" fill="#0a0e27"/>
+                                <rect width="800" height="400" fill="#0066cc" opacity="0.2"/>
+                                <text x="400" y="200" font-size="28" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Project Details</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="modal-gallery-dots">
+                        <div class="modal-gallery-dot active" onclick="event.stopPropagation(); changeModalSlide(0)"></div>
+                        <div class="modal-gallery-dot" onclick="event.stopPropagation(); changeModalSlide(1)"></div>
+                        <div class="modal-gallery-dot" onclick="event.stopPropagation(); changeModalSlide(2)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <h2 id="modalTitle">Project Title</h2>
+                
+                <div class="modal-grid">
+                    <div class="modal-left">
+                        <h3>Overview</h3>
+                        <p id="modalDescription">Project description goes here. This is where you can dive deep into what the project is about.</p>
+                        <p id="modalDetails">Additional details about the project, your role, and what you learned from building it.</p>
+                    </div>
+                    <div class="modal-right">
+                        <h3>Project Details</h3>
+                        <div class="detail-item">
+                            <strong>Tech Stack:</strong>
+                            <div id="modalTechStack" class="tech-stack"></div>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Role:</strong>
+                            <p id="modalRole">Full Stack Developer</p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Timeline:</strong>
+                            <p id="modalTimeline">3 months</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-gallery">
+                    <h3>Project Gallery</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="event.stopPropagation(); openGalleryImage(0)">
+                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#0a0e27"/>
+                                <rect width="300" height="200" fill="#0066cc" opacity="0.1"/>
+                                <text x="150" y="100" font-size="12" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Screenshot 1</text>
+                            </svg>
+                        </div>
+                        <div class="gallery-item" onclick="event.stopPropagation(); openGalleryImage(1)">
+                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#0a0e27"/>
+                                <rect width="300" height="200" fill="#0066cc" opacity="0.15"/>
+                                <text x="150" y="100" font-size="12" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Screenshot 2</text>
+                            </svg>
+                        </div>
+                        <div class="gallery-item" onclick="event.stopPropagation(); openGalleryImage(2)">
+                            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#0a0e27"/>
+                                <rect width="300" height="200" fill="#0066cc" opacity="0.2"/>
+                                <text x="150" y="100" font-size="12" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500">Screenshot 3</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Image Popup -->
+    <div id="galleryPopup" class="gallery-popup">
+        <button class="popup-close" onclick="closeGalleryImage()">✕</button>
+        <div class="popup-image">
+            <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+                <rect width="600" height="500" fill="#0a0e27"/>
+                <rect width="600" height="500" fill="#0066cc" opacity="0.1"/>
+                <text x="300" y="250" font-size="24" fill="#0066cc" text-anchor="middle" dominant-baseline="middle" font-weight="500" id="popupImageText">Screenshot</text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Gethin. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
