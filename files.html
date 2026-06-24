@@ -400,11 +400,16 @@
         }
 
         async function unlockFilesPage() {
-            const enteredHash = await hashText(filesPasswordInput.value);
-            if (enteredHash === FILES_PASSWORD_HASH) {
-                filesBody.classList.remove("files-locked");
-                filesOverlay.style.display = "none";
-                filesAuthError.textContent = "";
+            try {
+                const enteredHash = await hashText(filesPasswordInput.value);
+                if (enteredHash === FILES_PASSWORD_HASH) {
+                    filesBody.classList.remove("files-locked");
+                    filesOverlay.style.display = "none";
+                    filesAuthError.textContent = "";
+                    return;
+                }
+            } catch {
+                filesAuthError.textContent = "Password check unavailable in this browser.";
                 return;
             }
 
@@ -419,11 +424,11 @@
             filesPasswordInput.focus();
         }
 
-        filesUnlockBtn.addEventListener("click", () => {
-            unlockFilesPage();
+        filesUnlockBtn.addEventListener("click", async () => {
+            await unlockFilesPage();
         });
-        filesPasswordInput.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") unlockFilesPage();
+        filesPasswordInput.addEventListener("keydown", async (event) => {
+            if (event.key === "Enter") await unlockFilesPage();
         });
 
         showFilesAuth();
