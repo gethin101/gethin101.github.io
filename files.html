@@ -409,7 +409,8 @@
                     return;
                 }
             } catch {
-                filesAuthError.textContent = "Password check unavailable in this browser.";
+                console.error("Files password check failed.");
+                filesAuthError.textContent = "Password check failed. Please try again.";
                 return;
             }
 

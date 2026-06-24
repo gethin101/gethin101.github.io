@@ -127,8 +127,13 @@ function changeModalSlideBy(direction) {
     const slides = modal.querySelectorAll('.modal-gallery-slide');
     if (!slides.length) return;
 
-    const activeIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
-    const currentIndex = activeIndex >= 0 ? activeIndex : 0;
+    let currentIndex = 0;
+    for (let i = 0; i < slides.length; i++) {
+        if (slides[i].classList.contains('active')) {
+            currentIndex = i;
+            break;
+        }
+    }
 
     changeModalSlide(currentIndex + direction);
 }
