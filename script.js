@@ -117,83 +117,58 @@ function changeModalSlide(index) {
 }
 
 
-// =====================
-// PROJECT DATA
-// =====================
-const projectsData = {
-    1: {
-        title: "Gethin Hackpad v1",
-        description: "A 3x3 macropad with OLED display and RP2040 microcontroller.",
-        details: "Built as a custom shortcut keypad using CircuitPython and KiCad.",
-        techStack: ["KiCad", "CircuitPython", "Fusion360"],
-        role: "Designer + Developer",
-        timeline: "2025"
-    },
-    2: {
-        title: "GG Battle Robot",
-        description: "Combat robot with servo axe and Pico control.",
-        details: "WiFi-controlled battle robot designed in Fusion360.",
-        techStack: ["MicroPython", "Fusion360", "KiCad"],
-        role: "Full Build",
-        timeline: "2025"
-    },
-    3: {
-        title: "Gethin-75 Keyboard",
-        description: "Custom 75% mechanical keyboard.",
-        details: "PCB + case design with macro layers.",
-        techStack: ["KiCad", "CircuitPython", "Fusion360"],
-        role: "Full Stack Maker",
-        timeline: "2025"
-    },
-    4: {
-        title: "Ghost One",
-        description: "ESP32 pentesting multi-tool device.",
-        details: "Security tool inspired by Flipper Zero.",
-        techStack: ["ESP32", "KiCad", "Firmware"],
-        role: "Hardware Dev",
-        timeline: "2025"
-    },
-    5: {
-        title: "A1 Mini Camera System",
-        description: "Timelapse system for 3D printer.",
-        details: "Automated camera rig for Bambu Lab A1 Mini.",
-        techStack: ["Python", "Fusion360", "G-code"],
-        role: "Designer",
-        timeline: "2025"
-    },
-    6: {
-        title: "IC 555 Blinky",
-        description: "Classic LED flasher circuit.",
-        details: "Simple astable 555 timer PCB project.",
-        techStack: ["KiCad", "PCB", "Electronics"],
-        role: "Beginner Electronics",
-        timeline: "2024"
-    }
-};
+let currentModalImages = [];
 
 
 // =====================
 // OPEN MODAL
 // =====================
-function openProjectModal(id) {
+function openProjectModal(card) {
     const modal = document.getElementById("projectModal");
-    const data = projectsData[id];
+    if (!modal || !card) return;
 
-    if (!modal || !data) return;
+    const { title, description, details, role, timeline } = card.dataset;
+    const techStack = (card.dataset.techStack || "").split("|").filter(Boolean);
+    const images = (card.dataset.images || "").split("|").filter(Boolean);
 
-    document.getElementById("modalTitle").textContent = data.title;
-    document.getElementById("modalDescription").textContent = data.description;
-    document.getElementById("modalDetails").textContent = data.details;
-    document.getElementById("modalRole").textContent = data.role;
-    document.getElementById("modalTimeline").textContent = data.timeline;
+    currentModalImages = images.length ? images : [""];
+
+    document.getElementById("modalTitle").textContent = title || "";
+    document.getElementById("modalDescription").textContent = description || "";
+    document.getElementById("modalDetails").textContent = details || "";
+    document.getElementById("modalRole").textContent = role || "";
+    document.getElementById("modalTimeline").textContent = timeline || "";
 
     const tech = document.getElementById("modalTechStack");
     tech.innerHTML = "";
-    data.techStack.forEach(t => {
+    techStack.forEach(t => {
         const span = document.createElement("span");
         span.className = "tech-badge";
         span.textContent = t;
         tech.appendChild(span);
+    });
+
+    const modalImages = [
+        document.getElementById("modalImage1"),
+        document.getElementById("modalImage2"),
+        document.getElementById("modalImage3")
+    ];
+    const thumbs = [
+        document.getElementById("modalGalleryThumb1"),
+        document.getElementById("modalGalleryThumb2"),
+        document.getElementById("modalGalleryThumb3")
+    ];
+
+    modalImages.forEach((img, i) => {
+        const src = currentModalImages[i] || currentModalImages[0] || "";
+        img.src = src;
+        img.alt = `${title || "Project"} image ${i + 1}`;
+    });
+
+    thumbs.forEach((img, i) => {
+        const src = currentModalImages[i] || currentModalImages[0] || "";
+        img.src = src;
+        img.alt = `${title || "Project"} gallery image ${i + 1}`;
     });
 
     // reset modal slides
@@ -223,11 +198,10 @@ function closeProjectModal() {
 // =====================
 function openGalleryImage(index) {
     const popup = document.getElementById("galleryPopup");
-    const text = document.getElementById("popupImageText");
-
-    const labels = ["Screenshot 1", "Screenshot 2", "Screenshot 3"];
-
-    text.textContent = labels[index] || "Screenshot";
+    const image = document.getElementById("popupImage");
+    const src = currentModalImages[index] || currentModalImages[0] || "";
+    image.src = src;
+    image.alt = `Project gallery image ${index + 1}`;
 
     popup.classList.add("active");
     document.body.style.overflow = "hidden";
