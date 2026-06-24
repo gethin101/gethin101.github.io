@@ -384,6 +384,8 @@
 
     <script>
         const FILES_PASSWORD_HASH = "0d3f37d82dbd2f89a8e413dcdf0fce4ea75f1aec77c58899d33f26fbac84e8af";
+        const MAX_FAILED_ATTEMPTS = 5;
+        const LOCKOUT_DURATION_MS = 15000;
 
         const filesBody = document.body;
         const filesOverlay = document.getElementById("filesAuthOverlay");
@@ -426,10 +428,10 @@
             }
 
             failedAttempts += 1;
-            if (failedAttempts >= 5) {
-                lockUntil = Date.now() + 15000;
+            if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
+                lockUntil = Date.now() + LOCKOUT_DURATION_MS;
                 failedAttempts = 0;
-                filesAuthError.textContent = "Too many attempts. Try again in 15s.";
+                filesAuthError.textContent = `Too many attempts. Try again in ${Math.ceil(LOCKOUT_DURATION_MS / 1000)}s.`;
                 filesPasswordInput.value = "";
                 return;
             }
