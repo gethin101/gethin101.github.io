@@ -407,9 +407,10 @@ body {
     opacity: 1;
 }
 
-.carousel-slide svg {
+.carousel-slide img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .image-nav {
@@ -627,9 +628,10 @@ body {
     opacity: 1;
 }
 
-.modal-gallery-slide svg {
+.modal-gallery-slide img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .modal-gallery-dots {
@@ -735,9 +737,10 @@ body {
     transform: scale(1.03);
 }
 
-.gallery-item svg {
+.gallery-item img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 /* Gallery Popup */
@@ -792,7 +795,7 @@ body {
     animation: slideUp 0.3s ease;
 }
 
-.popup-image svg {
+.popup-image img {
     width: 100%;
     height: auto;
     display: block;
