@@ -384,7 +384,6 @@
 
     <script>
         const FILES_PASSWORD = "gethin101";
-        const FILES_AUTH_KEY = "files-page-access";
 
         const filesBody = document.body;
         const filesOverlay = document.getElementById("filesAuthOverlay");
@@ -394,7 +393,6 @@
 
         function unlockFilesPage() {
             if (filesPasswordInput.value === FILES_PASSWORD) {
-                sessionStorage.setItem(FILES_AUTH_KEY, "granted");
                 filesBody.classList.remove("files-locked");
                 filesOverlay.style.display = "none";
                 filesAuthError.textContent = "";
@@ -407,12 +405,6 @@
         }
 
         function showFilesAuth() {
-            if (sessionStorage.getItem(FILES_AUTH_KEY) === "granted") {
-                filesBody.classList.remove("files-locked");
-                filesOverlay.style.display = "none";
-                return;
-            }
-
             filesBody.classList.add("files-locked");
             filesOverlay.style.display = "flex";
             filesPasswordInput.focus();
