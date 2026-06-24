@@ -15,6 +15,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="files.html">Files</a></li>
             </ul>
         </div>
     </nav>
@@ -355,11 +356,13 @@
                         <div class="modal-gallery-slide"><img id="modalImage2" src="assets/projects/project1-2.jpg" alt="Project image 2"></div>
                         <div class="modal-gallery-slide"><img id="modalImage3" src="assets/projects/project1-3.jpg" alt="Project image 3"></div>
                     </div>
+                    <button class="modal-img-arrow modal-left" onclick="event.stopPropagation(); changeModalSlideBy(-1)">‹</button>
                     <div class="modal-gallery-dots">
                         <div class="modal-gallery-dot active" onclick="event.stopPropagation(); changeModalSlide(0)"></div>
                         <div class="modal-gallery-dot" onclick="event.stopPropagation(); changeModalSlide(1)"></div>
                         <div class="modal-gallery-dot" onclick="event.stopPropagation(); changeModalSlide(2)"></div>
                     </div>
+                    <button class="modal-img-arrow modal-right" onclick="event.stopPropagation(); changeModalSlideBy(1)">›</button>
                 </div>
             </div>
 

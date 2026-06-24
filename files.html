@@ -74,10 +74,116 @@
             margin: 60px 0;
             border-top: 1px solid var(--border-color);
         }
+
+        .protected-content {
+            transition: filter 0.3s ease;
+        }
+
+        body.files-locked {
+            overflow: hidden;
+        }
+
+        body.files-locked .protected-content {
+            filter: blur(6px);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .files-auth-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 14, 39, 0.72);
+            backdrop-filter: blur(8px);
+            z-index: 4000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .files-auth-card {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(
+                135deg,
+                var(--secondary-black) 0%,
+                rgba(0, 102, 204, 0.1) 100%
+            );
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg), var(--glow-blue);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .files-auth-card h2 {
+            margin-bottom: 0.8rem;
+            color: var(--text-white);
+            font-size: 1.6rem;
+        }
+
+        .files-auth-card p {
+            color: var(--text-light);
+            margin-bottom: 1.3rem;
+        }
+
+        .files-auth-input {
+            width: 100%;
+            background: rgba(10, 14, 39, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: var(--text-white);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .files-auth-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: var(--glow-blue);
+        }
+
+        .files-auth-btn {
+            width: 100%;
+            background-color: var(--accent-blue);
+            color: var(--text-white);
+            border: 2px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .files-auth-btn:hover {
+            background: transparent;
+            color: var(--accent-blue);
+        }
+
+        .files-auth-error {
+            margin-top: 0.9rem;
+            min-height: 1.1rem;
+            color: #ff8080;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 
-<body>
+<body class="files-locked">
+    <div id="filesAuthOverlay" class="files-auth-overlay" role="dialog" aria-modal="true" aria-labelledby="filesAuthTitle">
+        <div class="files-auth-card">
+            <h2 id="filesAuthTitle">Files Access</h2>
+            <p>Enter the password to view and download files.</p>
+            <input id="filesPasswordInput" class="files-auth-input" type="password" autocomplete="current-password" placeholder="Password" />
+            <button id="filesUnlockBtn" class="files-auth-btn" type="button">Unlock Files</button>
+            <p id="filesAuthError" class="files-auth-error"></p>
+        </div>
+    </div>
+
+    <div class="protected-content">
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -273,6 +379,52 @@
             <p>&copy; 2026 Gethin. All rights reserved.</p>
         </div>
     </footer>
+
+    </div>
+
+    <script>
+        const FILES_PASSWORD = "gethin101";
+        const FILES_AUTH_KEY = "files-page-access";
+
+        const filesBody = document.body;
+        const filesOverlay = document.getElementById("filesAuthOverlay");
+        const filesPasswordInput = document.getElementById("filesPasswordInput");
+        const filesUnlockBtn = document.getElementById("filesUnlockBtn");
+        const filesAuthError = document.getElementById("filesAuthError");
+
+        function unlockFilesPage() {
+            if (filesPasswordInput.value === FILES_PASSWORD) {
+                sessionStorage.setItem(FILES_AUTH_KEY, "granted");
+                filesBody.classList.remove("files-locked");
+                filesOverlay.style.display = "none";
+                filesAuthError.textContent = "";
+                return;
+            }
+
+            filesAuthError.textContent = "Incorrect password. Try again.";
+            filesPasswordInput.value = "";
+            filesPasswordInput.focus();
+        }
+
+        function showFilesAuth() {
+            if (sessionStorage.getItem(FILES_AUTH_KEY) === "granted") {
+                filesBody.classList.remove("files-locked");
+                filesOverlay.style.display = "none";
+                return;
+            }
+
+            filesBody.classList.add("files-locked");
+            filesOverlay.style.display = "flex";
+            filesPasswordInput.focus();
+        }
+
+        filesUnlockBtn.addEventListener("click", unlockFilesPage);
+        filesPasswordInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") unlockFilesPage();
+        });
+
+        showFilesAuth();
+    </script>
 
 </body>
 </html>
