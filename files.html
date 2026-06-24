@@ -408,8 +408,8 @@
                     filesAuthError.textContent = "";
                     return;
                 }
-            } catch {
-                console.error("Files password check failed.");
+            } catch (error) {
+                console.error("Files password check failed. Please try again.", error);
                 filesAuthError.textContent = "Password check failed. Please try again.";
                 return;
             }
