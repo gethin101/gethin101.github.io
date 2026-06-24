@@ -109,11 +109,33 @@ function changeCarouselSlide(e, direction, card) {
 // =====================
 function changeModalSlide(index) {
     const modal = document.getElementById('projectModal');
+    if (!modal) return;
     const slides = modal.querySelectorAll('.modal-gallery-slide');
     const dots = modal.querySelectorAll('.modal-gallery-dot');
+    if (!slides.length) return;
 
-    slides.forEach((s, i) => s.classList.toggle('active', i === index));
-    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    const normalizedIndex = (index + slides.length) % slides.length;
+
+    slides.forEach((s, i) => s.classList.toggle('active', i === normalizedIndex));
+    dots.forEach((d, i) => d.classList.toggle('active', i === normalizedIndex));
+}
+
+function changeModalSlideBy(direction) {
+    const modal = document.getElementById('projectModal');
+    if (!modal) return;
+
+    const slides = modal.querySelectorAll('.modal-gallery-slide');
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    for (let i = 0; i < slides.length; i++) {
+        if (slides[i].classList.contains('active')) {
+            currentIndex = i;
+            break;
+        }
+    }
+
+    changeModalSlide(currentIndex + direction);
 }
 
 
