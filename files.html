@@ -390,6 +390,8 @@
         const filesPasswordInput = document.getElementById("filesPasswordInput");
         const filesUnlockBtn = document.getElementById("filesUnlockBtn");
         const filesAuthError = document.getElementById("filesAuthError");
+        let failedAttempts = 0;
+        let lockUntil = 0;
 
         async function hashText(text) {
             const encoded = new TextEncoder().encode(text);
@@ -400,17 +402,35 @@
         }
 
         async function unlockFilesPage() {
+            const now = Date.now();
+            if (now < lockUntil) {
+                const waitSeconds = Math.ceil((lockUntil - now) / 1000);
+                filesAuthError.textContent = `Too many attempts. Try again in ${waitSeconds}s.`;
+                return;
+            }
+
             try {
                 const enteredHash = await hashText(filesPasswordInput.value);
                 if (enteredHash === FILES_PASSWORD_HASH) {
+                    failedAttempts = 0;
+                    lockUntil = 0;
                     filesBody.classList.remove("files-locked");
                     filesOverlay.style.display = "none";
                     filesAuthError.textContent = "";
                     return;
                 }
             } catch (error) {
-                console.error("Files password check failed. Please try again.", error);
+                console.error("Password hashing failed:", error);
                 filesAuthError.textContent = "Password check failed. Please try again.";
+                return;
+            }
+
+            failedAttempts += 1;
+            if (failedAttempts >= 5) {
+                lockUntil = Date.now() + 15000;
+                failedAttempts = 0;
+                filesAuthError.textContent = "Too many attempts. Try again in 15s.";
+                filesPasswordInput.value = "";
                 return;
             }
 
