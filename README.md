@@ -38,11 +38,11 @@ A clean, modern portfolio site built with **HTML**, **CSS**, and **JavaScript**,
 │   │
 │   └── projects/
 │       ├── project1-1.jpeg
+│       ├── project1-2.jpeg
+│       ├── project1-3.jpeg
 │       ├── project2-1.jpeg
-│       ├── project3-1.jpeg
-│       ├── project4-1.jpeg
-│       ├── project5-1.jpeg
-│       └── project6-3.png
+│       ├── project2-2.jpeg
+│       └── project2-3.png
 ```
 
 ## License
