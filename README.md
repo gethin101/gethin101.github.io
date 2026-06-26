@@ -7,7 +7,7 @@ A clean, modern portfolio site built with **HTML**, **CSS**, and **JavaScript**,
 - **Project showcase** highlighting engineering and programming work  
 - **Image gallery** for hardware builds and 3D prints  
 - **Lightweight static site** hosted on GitHub Pages  
-- **Custom domain:** gethingrice.com  
+- **Custom domain:** [gethingrice.com](https://gethingrice.com)
 
 ## Tech Stack
 - **HTML5**  
