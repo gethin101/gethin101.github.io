@@ -1,0 +1,98 @@
+import time
+import board
+import digitalio
+import usb_hid
+
+from adafruit_hid.keyboard import Keyboard
+from adafruit_hid.keycode import Keycode
+
+from adafruit_hid.consumer_control import ConsumerControl
+from adafruit_hid.consumer_control_code import ConsumerControlCode
+
+
+kbd = Keyboard(usb_hid.devices)
+cc = ConsumerControl(usb_hid.devices)
+
+
+key_pins = {
+    "1": board.A2,
+    "2": board.A3,
+    "3": board.SCK,
+
+    "4": board.A0,
+    "5": board.TX,
+    "6": board.MISO,
+
+    "7": board.A1,
+    "8": board.RX,
+    "9": board.MOSI,
+}
+
+
+actions = {
+    "1": ("media", ConsumerControlCode.SCAN_PREVIOUS_TRACK),
+    "2": ("media", ConsumerControlCode.PLAY_PAUSE),
+    "3": ("keycode", [Keycode.WINDOWS, Keycode.R]),
+
+    "4": ("media_hold", ConsumerControlCode.VOLUME_DECREMENT),
+    "5": ("media_hold", ConsumerControlCode.VOLUME_INCREMENT),
+
+    "6": ("toggle", None),
+    "7": ("keycode", [Keycode.ALT, Keycode.TAB]),
+    "8": ("keycode", [Keycode.WINDOWS, Keycode.L]),   
+    "9": ("media", ConsumerControlCode.SCAN_NEXT_TRACK),
+}
+
+
+buttons = {}
+for key, pin in key_pins.items():
+    btn = digitalio.DigitalInOut(pin)
+    btn.direction = digitalio.Direction.INPUT
+    btn.pull = digitalio.Pull.UP
+    buttons[key] = btn
+
+
+snip_mode = False
+
+# Main loop
+last_pressed = set()
+
+while True:
+    pressed = set()
+
+ 
+    for key, btn in buttons.items():
+        if not btn.value:
+            pressed.add(key)
+
+
+    new_keys = pressed - last_pressed
+
+
+    for key in new_keys:
+        if key in actions:
+            action_type, value = actions[key]
+
+            if action_type == "keycode":
+                kbd.send(*value)
+
+            elif action_type == "media":
+                cc.send(value)
+
+            elif action_type == "toggle":
+                snip_mode = not snip_mode
+
+                if snip_mode:
+                    kbd.send(Keycode.WINDOWS, Keycode.SHIFT, Keycode.S)
+                else:
+                    kbd.send(Keycode.ESCAPE)
+
+
+    for key in pressed:
+        if key in actions:
+            action_type, value = actions[key]
+            if action_type == "media_hold":
+                cc.send(value)
+
+    last_pressed = pressed
+    time.sleep(0.05)
