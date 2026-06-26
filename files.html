@@ -178,9 +178,9 @@
     <div id="filesAuthOverlay" class="files-auth-overlay" role="dialog" aria-modal="true" aria-labelledby="filesAuthTitle">
         <div class="files-auth-card">
             <h2 id="filesAuthTitle">Files Access</h2>
-            <p>Enter the password to view and download files.</p>
+            <p id="filesAuthText">Enter the password to view and download files.</p>
             <input id="filesPasswordInput" class="files-auth-input" type="password" autocomplete="current-password" placeholder="Password" />
-            <button id="filesUnlockBtn" class="files-auth-btn" type="button">Unlock Files</button>
+            <button id="filesUnlockBtn" class="files-auth-btn" type="button">Verify</button>
             <p id="filesAuthError" class="files-auth-error"></p>
         </div>
     </div>
@@ -394,6 +394,7 @@
     </div>
 
     <script>
+        const REQUIRE_PASSWORD = false;
         const FILES_PASSWORD_HASH = "0d3f37d82dbd2f89a8e413dcdf0fce4ea75f1aec77c58899d33f26fbac84e8af";
         const MAX_FAILED_ATTEMPTS = 5;
         const LOCKOUT_DURATION_MS = 15000;
@@ -403,6 +404,7 @@
         const filesPasswordInput = document.getElementById("filesPasswordInput");
         const filesUnlockBtn = document.getElementById("filesUnlockBtn");
         const filesAuthError = document.getElementById("filesAuthError");
+        if (!REQUIRE_PASSWORD) { filesPasswordInput.style.display="none"; document.getElementById("filesAuthText").textContent="Click Verify to access the files."; }
         let failedAttempts = 0;
         let lockUntil = 0;
 
@@ -415,6 +417,7 @@
         }
 
         async function unlockFilesPage() {
+            if (!REQUIRE_PASSWORD) { filesBody.classList.remove("files-locked"); filesOverlay.style.display="none"; return; }
             const now = Date.now();
             if (now < lockUntil) {
                 const waitSeconds = Math.ceil((lockUntil - now) / 1000);
