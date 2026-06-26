@@ -13,12 +13,43 @@ A clean, modern portfolio site built with **HTML**, **CSS**, and **JavaScript**,
 - **HTML5**  
 - **CSS3**  
 - **JavaScript**  
-- **GitHub Pages**  
-
+- **GitHub Pages**
+  
 ## File Structure
 ```
 /
 ├── index.html
+├── styles.css
+├── script.js
+
+├── files/
+│   └── index.html
+
+├── assets/
+│   ├── downloads/
+│   │   ├── CAD/
+│   │   └── FIRMWARE/
+│   │
+│   ├── gallery/
+│   │   ├── gallery1.png
+│   │   ├── gallery2.png
+│   │   ├── gallery3.png
+│   │   ├── gallery4.png
+│   │   └── gallery5.png
+│   │
+│   └── projects/
+│       ├── project1-1.jpeg
+│       ├── project2-1.jpeg
+│       ├── project3-1.jpeg
+│       ├── project4-1.jpeg
+│       ├── project5-1.jpeg
+│       └── project6-3.png
+```
+
+
+
+
+
 ├── css/
 │   └── styles.css
 ├── js/
