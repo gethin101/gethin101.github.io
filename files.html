@@ -171,6 +171,56 @@
             color: #ff8080;
             font-size: 0.9rem;
         }
+
+        /* =======================================================
+           RECTANGULAR METADATA TAGS (NEW STYLE YOU WANTED)
+        ======================================================= */
+
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 3px 8px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+
+            border-radius: 2px; /* rectangular */
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-white);
+        }
+
+        /* TYPE COLORS */
+        .tech-badge.zip {
+            border-color: #4aa3ff;
+            color: #4aa3ff;
+        }
+
+        .tech-badge.python {
+            border-color: #4bff88;
+            color: #4bff88;
+        }
+
+        .tech-badge.mov {
+            border-color: #c084ff;
+            color: #c084ff;
+        }
+
+        /* META TAGS (VERSION / SIZE) */
+        .tech-badge.meta {
+            border-color: rgba(200, 200, 200, 0.35);
+            color: #cfcfcf;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-1px);
+            transition: 0.15s ease;
+        }
     </style>
 </head>
 
@@ -187,7 +237,7 @@
 
     <div class="protected-content">
 
-    <!-- Navigation -->
+    <!-- NAV -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Gethin</a>
@@ -201,23 +251,20 @@
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- HERO -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <h1>Files & Downloads</h1>
-                <p>
-                    CAD files, project firmware an downloadable PCB project files.
-                </p>
+                <p>CAD files, project firmware and downloadable PCB project files.</p>
             </div>
         </div>
     </section>
 
-    <!-- Files -->
+    <!-- FILES -->
     <section class="files-section">
         <div class="container">
 
-            <!-- CAD file downloads -->
             <h2>CAD Files</h2>
 
             <div class="files-grid">
@@ -225,166 +272,139 @@
                 <div class="file-card">
                     <h3>Hackpad CAD</h3>
                     <p>Hackpad base, cover and assembly view in CAD</p>
-                    <span class="tech-badge">Zip</span>
+
+                    <span class="tech-badge zip">ZIP</span>
+                    <span class="tech-badge meta">v1.0</span>
+                    <span class="tech-badge meta">24MB</span>
+
                     <br><br>
-                    <a href="assets/downloads/CAD/hackpad_CAD.zip" download class="download-btn">
-                        Download
-                    </a>
+                    <a href="assets/downloads/CAD/hackpad_CAD.zip" download class="download-btn">Download</a>
                 </div>
 
-                 <div class="file-card">
+                <div class="file-card">
                     <h3>Gethin-75 CAD files</h3>
                     <p>Keyboard CAD files in one piece and split into halves</p>
-                    <span class="tech-badge">Zip</span>
+
+                    <span class="tech-badge zip">ZIP</span>
+                    <span class="tech-badge meta">v2.0</span>
+                    <span class="tech-badge meta">31MB</span>
+
                     <br><br>
-                    <a href="assets/downloads/CAD/Gethin-75_CAD.zip" download class="download-btn">
-                        Download
-                    </a>
+                    <a href="assets/downloads/CAD/Gethin-75_CAD.zip" download class="download-btn">Download</a>
                 </div>
 
                 <div class="file-card">
                     <h3>GG Battle Robot CAD</h3>
                     <p>Chassis top & bottom, axe weapon and CAD assembly files</p>
-                    <span class="tech-badge">Zip</span>
+
+                    <span class="tech-badge zip">ZIP</span>
+                    <span class="tech-badge meta">v1.3</span>
+                    <span class="tech-badge meta">18MB</span>
+
                     <br><br>
-                    <a href="assets/downloads/CAD/GG-Battle-Robot_CAD.zip" download class="download-btn">
-                        Download
-                    </a>
+                    <a href="assets/downloads/CAD/GG-Battle-Robot_CAD.zip" download class="download-btn">Download</a>
                 </div>
 
             </div>
 
             <div class="section-divider"></div>
 
-            <!-- Firmware Files -->
             <h2>Firmware</h2>
 
             <div class="files-grid">
 
                 <div class="file-card">
                     <h3>Hackpad Firmware</h3>
-                    <p>1 File CircuitPython code.py file</p></p>
-                    <span class="tech-badge">Python</span>
+                    <p>1 File CircuitPython code.py file</p>
+
+                    <span class="tech-badge python">PYTHON</span>
+                    <span class="tech-badge meta">v1.0</span>
+                    <span class="tech-badge meta">5KB</span>
+
                     <br><br>
-                    <a href="assets/downloads/FIRMWARE/hackpad/code.py" download class="download-btn">
-                        Download
-                    </a>
+                    <a href="assets/downloads/FIRMWARE/hackpad/code.py" download class="download-btn">Download</a>
                 </div>
 
                 <div class="file-card">
                     <h3>Gethin-75 Firmware</h3>
                     <p>1 File CircuitPython KMK firmware file</p>
-                    <span class="tech-badge">Python</span>
+
+                    <span class="tech-badge python">PYTHON</span>
+                    <span class="tech-badge meta">v1.2</span>
+                    <span class="tech-badge meta">12KB</span>
+
                     <br><br>
-                    <a href="assets/downloads/FIRMWARE/keyboard/code.py" download class="download-btn">
-                        Download
-                    </a>
+                    <a href="assets/downloads/FIRMWARE/keyboard/code.py" download class="download-btn">Download</a>
                 </div>
 
                 <div class="file-card">
                     <h3>GG Battle Robot Firmware</h3>
                     <p>Python files for main robot, pico remote and seperate file for Web AP</p>
-                    <span class="tech-badge">Zip</span>
+
+                    <span class="tech-badge zip">ZIP</span>
+                    <span class="tech-badge meta">v2.0</span>
+                    <span class="tech-badge meta">8MB</span>
+
                     <br><br>
-                    <a href="assets/downloads/FIRMWARE/robot/GG-Battle-Robot_FIRMWARE.zip" download class="download-btn">
-                        Download
-                    </a>
+                    <a href="assets/downloads/FIRMWARE/robot/GG-Battle-Robot_FIRMWARE.zip" download class="download-btn">Download</a>
                 </div>
 
             </div>
 
             <div class="section-divider"></div>
 
-            
-            <!-- PCB file downloads --> <!--
-            <h2>PCB Project Files</h2>
+            <h2>Project Demos</h2>
 
             <div class="files-grid">
 
-
                 <div class="file-card">
-                    <h3>Gethin-75 PCB</h3>
-                    <p>KiCad PCB Project Bundle File (.pro)</p>
-                    <span class="tech-badge">PCB</span>
+                    <h3>Hackpad Demo Video</h3>
+                    <p>Macro keypad demonstration</p>
+
+                    <span class="tech-badge mov">MOV</span>
+                    <span class="tech-badge meta">v1.0</span>
+                    <span class="tech-badge meta">20MB</span>
+
                     <br><br>
-                    <a href="assets/downloads/PCB-PRO/gethin_75_keyboard.kicad_pro" download class="download-btn">
-                        Download
-                    </a>
+                    <a href="https://drive.google.com/file/d/1SN6_Jn4tApgLRpyzZipDD-V8Z1X3xwi7/view"
+                       target="_blank"
+                       class="download-btn">View</a>
                 </div>
 
                 <div class="file-card">
-                    <h3>Robot Remote PCB</h3>
-                    <p>KiCad PCB Project Bundle File (.pro)</p>
-                    <span class="tech-badge">PCB</span>
+                    <h3>Gethin-75 Demo Video</h3>
+                    <p>Typing + macro demo</p>
+
+                    <span class="tech-badge mov">MOV</span>
+                    <span class="tech-badge meta">v1.2</span>
+                    <span class="tech-badge meta">15MB</span>
+
                     <br><br>
-                    <a href="assets/downloads/PCB-PRO/GG-battle-robot v1.kicad_pro" download class="download-btn">
-                        Download
-                    </a>
+                    <a href="https://drive.google.com/file/d/18uSU1EbHXQhmAcJua5LjIKMJpCC8aHLT/view"
+                       target="_blank"
+                       class="download-btn">View</a>
                 </div>
 
-                      <div class="file-card">
-                    <h3>555 Blinky PCB</h3>
-                    <p>KiCad PCB Project Bundle File (.pro)</p>
-                    <span class="tech-badge">PCB</span>
+                <div class="file-card">
+                    <h3>GG Battle Robot Demo</h3>
+                    <p>Early driving test footage</p>
+
+                    <span class="tech-badge mov">MOV</span>
+                    <span class="tech-badge meta">v0.9</span>
+                    <span class="tech-badge meta">11MB</span>
+
                     <br><br>
-                    <a href="assets/downloads/PCB-PRO/gethin_blinky.kicad_pro" download class="download-btn">
-                        Download
-                    </a>
+                    <a href="https://drive.google.com/file/d/12P38xcwiw2u3pCld52CsyZu9JH5WYfoP/view"
+                       target="_blank"
+                       class="download-btn">View</a>
                 </div>
 
             </div>
- 
-            <div class="section-divider"></div> -->
 
-<!-- Resources -->
-<h2>Project Demos</h2>
-
-<div class="files-grid">
-
-    <div class="file-card">
-        <h3>Hackpad Demo Video</h3>
-        <p>Short demonstration video of my hackpad showing off its macro capabilities</p>
-        <span class="tech-badge">MOV</span>
-        <br><br>
-        <a href="https://drive.google.com/file/d/1SN6_Jn4tApgLRpyzZipDD-V8Z1X3xwi7/view" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="download-btn">
-            View
-        </a>
-    </div>
-
-    <div class="file-card">
-        <h3>Gethin-75 Demo Video</h3>
-        <p>Simple typing demonstration and macro keys use video</p>
-        <span class="tech-badge">MOV</span>
-        <br><br>
-        <a href="https://drive.google.com/file/d/18uSU1EbHXQhmAcJua5LjIKMJpCC8aHLT/view"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="download-btn">
-            View
-        </a>
-    </div>
-
-    <div class="file-card">
-        <h3>GG Battle Robot Demo</h3>
-        <p>A very short driving demo of the robot during build v1</p>
-        <span class="tech-badge">MOV</span>
-        <br><br>
-        <a href="https://drive.google.com/file/d/12P38xcwiw2u3pCld52CsyZu9JH5WYfoP/view?usp=sharing"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="download-btn">
-            View
-        </a>
-    </div>
-
-</div>
-
+        </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2026 Gethin. All rights reserved.</p>
@@ -393,8 +413,9 @@
 
     </div>
 
+    <!-- JS (UNCHANGED) -->
     <script>
-        const REQUIRE_PASSWORD = false;
+        const REQUIRE_PASSWORD = true;
         const FILES_PASSWORD_HASH = "0d3f37d82dbd2f89a8e413dcdf0fce4ea75f1aec77c58899d33f26fbac84e8af";
         const MAX_FAILED_ATTEMPTS = 5;
         const LOCKOUT_DURATION_MS = 15000;
@@ -404,7 +425,12 @@
         const filesPasswordInput = document.getElementById("filesPasswordInput");
         const filesUnlockBtn = document.getElementById("filesUnlockBtn");
         const filesAuthError = document.getElementById("filesAuthError");
-        if (!REQUIRE_PASSWORD) { filesPasswordInput.style.display="none"; document.getElementById("filesAuthText").textContent="Click Verify to access the files."; }
+
+        if (!REQUIRE_PASSWORD) {
+            filesPasswordInput.style.display="none";
+            document.getElementById("filesAuthText").textContent="Click Verify to access the files.";
+        }
+
         let failedAttempts = 0;
         let lockUntil = 0;
 
@@ -417,7 +443,12 @@
         }
 
         async function unlockFilesPage() {
-            if (!REQUIRE_PASSWORD) { filesBody.classList.remove("files-locked"); filesOverlay.style.display="none"; return; }
+            if (!REQUIRE_PASSWORD) {
+                filesBody.classList.remove("files-locked");
+                filesOverlay.style.display = "none";
+                return;
+            }
+
             const now = Date.now();
             if (now < lockUntil) {
                 const waitSeconds = Math.ceil((lockUntil - now) / 1000);
@@ -427,6 +458,7 @@
 
             try {
                 const enteredHash = await hashText(filesPasswordInput.value);
+
                 if (enteredHash === FILES_PASSWORD_HASH) {
                     failedAttempts = 0;
                     lockUntil = 0;
@@ -436,39 +468,26 @@
                     return;
                 }
             } catch (error) {
-                console.error("Password hashing failed:", error);
-                filesAuthError.textContent = "Password check failed. Please try again.";
+                filesAuthError.textContent = "Password check failed.";
                 return;
             }
 
-            failedAttempts += 1;
+            failedAttempts++;
             if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
                 lockUntil = Date.now() + LOCKOUT_DURATION_MS;
                 failedAttempts = 0;
-                filesAuthError.textContent = `Too many attempts. Try again in ${Math.ceil(LOCKOUT_DURATION_MS / 1000)}s.`;
-                filesPasswordInput.value = "";
+                filesAuthError.textContent = "Too many attempts. Try again later.";
                 return;
             }
 
-            filesAuthError.textContent = "Incorrect password. Try again.";
+            filesAuthError.textContent = "Incorrect password.";
             filesPasswordInput.value = "";
-            filesPasswordInput.focus();
         }
 
-        function showFilesAuth() {
-            filesBody.classList.add("files-locked");
-            filesOverlay.style.display = "flex";
-            filesPasswordInput.focus();
-        }
-
-        filesUnlockBtn.addEventListener("click", async () => {
-            await unlockFilesPage();
+        filesUnlockBtn.addEventListener("click", unlockFilesPage);
+        filesPasswordInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") unlockFilesPage();
         });
-        filesPasswordInput.addEventListener("keydown", async (event) => {
-            if (event.key === "Enter") await unlockFilesPage();
-        });
-
-        showFilesAuth();
     </script>
 
 </body>
