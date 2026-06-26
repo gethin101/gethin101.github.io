@@ -17,7 +17,6 @@ A clean, modern portfolio site built with **HTML**, **CSS**, and **JavaScript**,
   
 ## File Structure
 ```
-/
 ├── index.html
 ├── styles.css
 ├── script.js
@@ -44,18 +43,6 @@ A clean, modern portfolio site built with **HTML**, **CSS**, and **JavaScript**,
 │       ├── project4-1.jpeg
 │       ├── project5-1.jpeg
 │       └── project6-3.png
-```
-
-
-
-
-
-├── css/
-│   └── styles.css
-├── js/
-│   └── script.js
-└── assets/
-    └── images/
 ```
 
 ## License
