@@ -319,6 +319,50 @@
                     </div>
                 </div>
 
+                    <!-- Project 6 -->
+                <div class="project-card" onclick="openProjectModal(this)"
+                    data-title="IC 555 Blinky"
+                    data-description="An astable LED circuit board blinker built around a 555 timer."
+                    data-details="I designed this PCB circuit (with no microcontrollers) in KiCad for HackClub Blueprint. I messed up the first assembly but I will be remaking and rebuilding it soon."
+                    data-role="Designer"
+                    data-timeline="2026"
+                    data-tech-stack="KiCad|JLCPCB|HackClub"
+                    data-images="assets/projects/project6-3.png|assets/projects/project6-2.png|assets/projects/project6-1.png">
+                    <div class="project-image-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active"><img src="assets/projects/project6-3.png" alt="IC 555 Blinky image 1"></div>
+                            <div class="carousel-slide"><img src="assets/projects/project6-2.png" alt="IC 555 Blinky image 2"></div>
+                            <div class="carousel-slide"><img src="assets/projects/project6-1.png" alt="IC 555 Blinky image 3"></div>
+                        </div>
+                        <div class="image-nav">
+                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
+                            <div class="carousel-dots">
+                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
+                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
+                            </div>
+                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>IC 555 Blinky</h3>
+                        <p>An astable LED circuit board blinker built around a 555 timer.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">KiCad</span>
+                            <span class="tech-badge">JLCPCB</span>
+                            <span class="tech-badge">HackClub</span>
+                        </div>
+                    <a href="https://github.com/gethin101/Gethin-blinky"
+   class="github-link"
+   target="_blank"
+   rel="noopener noreferrer"
+   onclick="event.stopPropagation()">
+   View on GitHub →
+</a>
+
+                    </div>
+                </div>
+
                 <!-- Project 5 -->
                 <div class="project-card" onclick="openProjectModal(this)"
                     data-title="A1 Mini Camera System"
@@ -363,49 +407,7 @@
                     </div>
                 </div>
 
-                <!-- Project 6 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="IC 555 Blinky"
-                    data-description="An astable LED circuit board blinker built around a 555 timer."
-                    data-details="I designed this PCB circuit (with no microcontrollers) in KiCad for HackClub Blueprint. I messed up the first assembly but I will be remaking and rebuilding it soon."
-                    data-role="Designer"
-                    data-timeline="2026"
-                    data-tech-stack="KiCad|JLCPCB|HackClub"
-                    data-images="assets/projects/project6-1.png|assets/projects/project6-2.png|assets/projects/project6-3.png">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project6-1.png" alt="IC 555 Blinky image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project6-2.png" alt="IC 555 Blinky image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project6-3.png" alt="IC 555 Blinky image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>IC 555 Blinky</h3>
-                        <p>An astable LED circuit board blinker built around a 555 timer.</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">KiCad</span>
-                            <span class="tech-badge">JLCPCB</span>
-                            <span class="tech-badge">HackClub</span>
-                        </div>
-                    <a href="https://github.com/gethin101/Gethin-blinky"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
+            
             </div>
         </div>
     </section>
