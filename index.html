@@ -4,176 +4,178 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gethin | Terminal Access</title>
-    <meta name="description" content="Choose a destination from the terminal prompt.">
+    <title>Gethin | Search</title>
+    <meta name="description" content="Search the site or choose a destination.">
     <style>
         :root {
-            --bg: #05070f;
-            --panel: #0d121f;
-            --line: #263148;
-            --text: #d9fbe7;
-            --accent: #39ff7a;
-            --muted: #98b5a2;
-            --error: #ff8f8f;
+            --bg: #f6f7f9;
+            --card: #ffffff;
+            --accent: #0066cc;
+            --text: #0b1220;
+            --muted: #56606a;
+            --error: #d9534f;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             min-height: 100vh;
-            background: radial-gradient(circle at top, #121a2d 0%, var(--bg) 60%);
+            background: linear-gradient(180deg,#f8fafc 0%, #eef2f6 100%);
             color: var(--text);
-            font-family: "Consolas", "SFMono-Regular", "Menlo", "Monaco", monospace;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 24px;
         }
 
-        .terminal {
-            width: min(700px, 100%);
-            border: 1px solid var(--line);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
-            background: var(--panel);
+        .search-card {
+            width: min(760px, 100%);
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(16,24,40,0.08);
+            padding: 32px;
+            text-align: center;
         }
 
-        .terminal-head {
-            border-bottom: 1px solid var(--line);
-            padding: 10px 14px;
-            color: var(--muted);
-            font-size: 0.85rem;
-            background: rgba(0, 0, 0, 0.25);
-        }
-
-        .terminal-body {
-            padding: 18px 14px;
-        }
-
-        .line {
-            margin-bottom: 10px;
-            color: var(--muted);
-        }
-
-        .prompt-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid var(--line);
-            border-radius: 6px;
-            padding: 10px 12px;
-            background: rgba(0, 0, 0, 0.25);
-        }
-
-        .prompt {
-            color: var(--accent);
-            white-space: nowrap;
-        }
-
-        input {
-            flex: 1;
-            border: 0;
-            background: transparent;
+        h1 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
             color: var(--text);
-            font: inherit;
+        }
+
+        p.lead {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        form { display: flex; gap: 10px; align-items: center; justify-content: center; }
+
+        input[type="search"] {
+            width: 100%;
+            max-width: 560px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1px solid #d6dce6;
+            font-size: 1rem;
+            color: var(--text);
             outline: none;
         }
 
-        input::placeholder {
-            color: #6e8b78;
-        }
+        input[type="search"]:focus { box-shadow: 0 0 0 4px rgba(0,102,204,0.08); border-color: var(--accent); }
 
         button {
-            border: 1px solid var(--accent);
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button.secondary {
             background: transparent;
             color: var(--accent);
-            border-radius: 6px;
-            padding: 7px 10px;
-            font: inherit;
-            cursor: pointer;
+            border: 1px solid #cfe6ff;
         }
 
-        button:hover {
-            background: rgba(57, 255, 122, 0.12);
-        }
-
-        #welcomeFeedback {
-            margin-top: 10px;
-            min-height: 1.2em;
+        #feedback {
+            margin-top: 14px;
             color: var(--muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            min-height: 1.1em;
         }
 
-        #welcomeFeedback.error {
-            color: var(--error);
+        #feedback.error { color: var(--error); }
+
+        .links { margin-top: 16px; display: flex; gap: 12px; justify-content: center; }
+
+        a.small {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 520px) {
+            .search-card { padding: 20px; }
+            input[type="search"] { max-width: 100%; }
+            form { flex-direction: column; }
+            button { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <main class="terminal" role="main">
-        <div class="terminal-head">terminal@gethin101.github.io</div>
-        <div class="terminal-body">
-            <p class="line">Destination command required.</p>
-            <form id="welcomeForm" autocomplete="off">
-                <div class="prompt-row">
-                    <span class="prompt">$</span>
-                    <input id="welcomeInput" type="text" placeholder="enter command" aria-label="Destination command" />
-                    <button type="submit">run</button>
-                </div>
-            </form>
-            <p id="welcomeFeedback"></p>
-            <noscript><p class="line">JavaScript is required to continue.</p></noscript>
+    <main class="search-card" role="main">
+        <h1>Gethin's Site</h1>
+        <p class="lead">Search the site or enter a destination (e.g., &quot;portfolio&quot; or &quot;games&quot;).</p>
+
+        <form id="searchForm" autocomplete="off">
+            <input id="searchInput" type="search" placeholder="Search site or type a command" aria-label="Search or command" />
+            <button type="submit">Search</button>
+        </form>
+
+        <p id="feedback"></p>
+
+        <div class="links">
+            <a class="small" href="/portfolio/index.html">Portfolio</a>
+            <a class="small" href="https://sparxmaths.github.io">Games</a>
+            <a class="small" href="/about/">About</a>
         </div>
+
+        <noscript><p style="color:var(--muted);margin-top:12px;">JavaScript is required for the interactive search.</p></noscript>
     </main>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("welcomeForm");
-            const input = document.getElementById("welcomeInput");
-            const feedback = document.getElementById("welcomeFeedback");
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('searchForm');
+            const input = document.getElementById('searchInput');
+            const feedback = document.getElementById('feedback');
 
             const portfolioCommands = ["portfolio", "projects", "project", "home", "site", "index", "main"];
             const gamesCommands = ["games", "game", "play", "sparx", "sparxmaths"];
 
-            const redirectTo = (url, message) => {
-                feedback.classList.remove("error");
-                feedback.textContent = message;
-                setTimeout(() => window.location.assign(url), 120);
+            const showFeedback = (msg, isError = false) => {
+                feedback.classList.toggle('error', !!isError);
+                feedback.textContent = msg;
             };
 
-            const handleInput = () => {
-                const command = input.value.trim().toLowerCase();
-
-                if (!command) {
-                    feedback.classList.add("error");
-                    feedback.textContent = "Enter a command.";
+            const handleQuery = (raw) => {
+                const q = raw.trim();
+                if (!q) {
+                    showFeedback('Please enter a search term or command.', true);
                     return;
                 }
 
-                if (portfolioCommands.some((entry) => command.includes(entry))) {
-                    redirectTo("/portfolio/index.html", "Redirecting...");
+                const lower = q.toLowerCase();
+
+                if (portfolioCommands.some(entry => lower.includes(entry))) {
+                    showFeedback('Opening portfolio...');
+                    setTimeout(() => window.location.assign('/portfolio/index.html'), 120);
                     return;
                 }
 
-                if (gamesCommands.some((entry) => command.includes(entry))) {
-                    redirectTo("https://sparxmaths.github.io", "Redirecting...");
+                if (gamesCommands.some(entry => lower.includes(entry))) {
+                    showFeedback('Opening games...');
+                    setTimeout(() => window.location.assign('https://sparxmaths.github.io'), 120);
                     return;
                 }
 
-                feedback.classList.add("error");
-                feedback.textContent = "Unknown command.";
+                // Fallback: site-scoped Google search
+                showFeedback('Searching site...');
+                const searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(q + ' site:gethin101.github.io');
+                setTimeout(() => window.location.assign(searchUrl), 120);
             };
 
-            form.addEventListener("submit", (event) => {
-                event.preventDefault();
-                handleInput();
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                handleQuery(input.value);
             });
 
-            input.addEventListener("keydown", (event) => {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    handleInput();
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleQuery(input.value);
                 }
             });
 
