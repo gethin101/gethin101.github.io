@@ -1,4 +1,69 @@
 // =====================
+// LANDING DESTINATION PROMPT
+// =====================
+document.addEventListener("DOMContentLoaded", () => {
+    const gate = document.getElementById("welcomeGate");
+    const form = document.getElementById("welcomeForm");
+    const input = document.getElementById("welcomeInput");
+    const feedback = document.getElementById("welcomeFeedback");
+    const chips = document.querySelectorAll(".welcome-chip");
+
+    if (!gate || !form || !input || !feedback) return;
+
+    const hideGate = () => {
+        gate.classList.add("hidden");
+        document.body.classList.remove("landing-gate-active");
+        feedback.textContent = "";
+        input.value = "";
+    };
+
+    const goToGames = () => {
+        window.location.href = "https://sparxmaths.github.io";
+    };
+
+    const handleCommand = (value) => {
+        const command = value.trim().toLowerCase();
+
+        if (!command) {
+            feedback.textContent = "Type portfolio or games to continue.";
+            return;
+        }
+
+        if (
+            ["portfolio", "projects", "project", "home", "site"].some((keyword) =>
+                command.includes(keyword)
+            )
+        ) {
+            hideGate();
+            return;
+        }
+
+        if (
+            ["games", "game", "sparx", "sparxmaths"].some((keyword) =>
+                command.includes(keyword)
+            )
+        ) {
+            feedback.textContent = "Taking you to games...";
+            setTimeout(goToGames, 180);
+            return;
+        }
+
+        feedback.textContent = 'I did not catch that. Try "portfolio" or "games".';
+    };
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        handleCommand(input.value);
+    });
+
+    chips.forEach((chip) => {
+        chip.addEventListener("click", () => handleCommand(chip.dataset.destination || ""));
+    });
+
+    input.focus();
+});
+
+// =====================
 // TYPEWRITER
 // =====================
 const typewriterElement = document.getElementById('typewriter');
