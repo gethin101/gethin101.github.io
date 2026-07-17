@@ -132,8 +132,13 @@
             const input = document.getElementById('searchInput');
             const feedback = document.getElementById('feedback');
 
-            const knownCommands = {
-                "search": true
+            const redirects = {
+                "portfolio": "https://gethin101.github.io/portfolio",
+                "portfolios": "https://gethin101.github.io/portfolio",
+                "game": "https://sparxmaths.github.io",
+                "games": "https://sparxmaths.github.io",
+                "sparx": "https://sparxmaths.github.io",
+                "sparxmaths": "https://sparxmaths.github.io"
             };
 
             const showFeedback = (msg, isError = false) => {
@@ -150,8 +155,9 @@
 
                 const lower = q.toLowerCase();
 
-                if (knownCommands[lower]) {
-                    showFeedback('Searching...');
+                if (redirects[lower]) {
+                    showFeedback(`Redirecting to ${lower}...`);
+                    window.location.href = redirects[lower];
                     return;
                 }
 
