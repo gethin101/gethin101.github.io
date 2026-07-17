@@ -5,22 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gethin | Search</title>
-    <meta name="description" content="Search the site or choose a destination.">
+    <meta name="description" content="Search command interface.">
     <style>
         :root {
-            --bg: #f6f7f9;
-            --card: #ffffff;
-            --accent: #0066cc;
-            --text: #0b1220;
-            --muted: #56606a;
-            --error: #d9534f;
+            --bg: #0b1220;
+            --bg-soft: #111a2b;
+            --card: #0f1728;
+            --accent: #4da3ff;
+            --text: #e6edf7;
+            --muted: #9fb0c7;
+            --error: #ff7b72;
+            --border: #23324a;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             min-height: 100vh;
-            background: linear-gradient(180deg,#f8fafc 0%, #eef2f6 100%);
+            background: radial-gradient(1200px 600px at 20% -10%, #1a2740 0%, var(--bg) 55%);
             color: var(--text);
             font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             display: flex;
@@ -31,15 +33,16 @@
 
         .search-card {
             width: min(760px, 100%);
-            background: var(--card);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(16,24,40,0.08);
-            padding: 32px;
+            background: linear-gradient(180deg, #121d31 0%, var(--card) 100%);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            padding: 30px;
             text-align: center;
         }
 
         h1 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             margin-bottom: 8px;
             color: var(--text);
         }
@@ -49,52 +52,53 @@
             margin-bottom: 20px;
         }
 
-        form { display: flex; gap: 10px; align-items: center; justify-content: center; }
+        form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
 
         input[type="search"] {
             width: 100%;
             max-width: 560px;
             padding: 12px 14px;
-            border-radius: 8px;
-            border: 1px solid #d6dce6;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-soft);
             font-size: 1rem;
             color: var(--text);
             outline: none;
         }
 
-        input[type="search"]:focus { box-shadow: 0 0 0 4px rgba(0,102,204,0.08); border-color: var(--accent); }
+        input[type="search"]::placeholder {
+            color: #7f93b1;
+        }
+
+        input[type="search"]:focus {
+            box-shadow: 0 0 0 4px rgba(77, 163, 255, 0.15);
+            border-color: var(--accent);
+        }
 
         button {
             background: var(--accent);
-            color: white;
+            color: #071223;
             border: none;
             padding: 10px 14px;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: 600;
-        }
-
-        button.secondary {
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid #cfe6ff;
+            font-weight: 700;
         }
 
         #feedback {
             margin-top: 14px;
             color: var(--muted);
             font-size: 0.95rem;
-            min-height: 1.1em;
+            min-height: 1.2em;
         }
 
-        #feedback.error { color: var(--error); }
-
-        .links { margin-top: 16px; display: flex; gap: 12px; justify-content: center; }
-
-        a.small {
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.95rem;
+        #feedback.error {
+            color: var(--error);
         }
 
         @media (max-width: 520px) {
@@ -107,23 +111,19 @@
 </head>
 <body>
     <main class="search-card" role="main">
-        <h1>Gethin's Site</h1>
-        <p class="lead">Search the site or enter a destination (e.g., &quot;portfolio&quot; or &quot;games&quot;).</p>
+        <h1>Gethin's Search</h1>
+        <p class="lead">Type a command and press Enter to search.</p>
 
         <form id="searchForm" autocomplete="off">
-            <input id="searchInput" type="search" placeholder="Search site or type a command" aria-label="Search or command" />
+            <input id="searchInput" type="search" placeholder="Enter command..." aria-label="Search command" />
             <button type="submit">Search</button>
         </form>
 
-        <p id="feedback"></p>
+        <p id="feedback" aria-live="polite"></p>
 
-        <div class="links">
-            <a class="small" href="/portfolio/index.html">Portfolio</a>
-            <a class="small" href="https://sparxmaths.github.io">Games</a>
-            <a class="small" href="/about/">About</a>
-        </div>
-
-        <noscript><p style="color:var(--muted);margin-top:12px;">JavaScript is required for the interactive search.</p></noscript>
+        <noscript>
+            <p style="color:var(--muted);margin-top:12px;">JavaScript is required for search.</p>
+        </noscript>
     </main>
 
     <script>
@@ -132,8 +132,9 @@
             const input = document.getElementById('searchInput');
             const feedback = document.getElementById('feedback');
 
-            const portfolioCommands = ["portfolio", "projects", "project", "home", "site", "index", "main"];
-            const gamesCommands = ["games", "game", "play", "sparx", "sparxmaths"];
+            const knownCommands = {
+                "search": true
+            };
 
             const showFeedback = (msg, isError = false) => {
                 feedback.classList.toggle('error', !!isError);
@@ -143,28 +144,18 @@
             const handleQuery = (raw) => {
                 const q = raw.trim();
                 if (!q) {
-                    showFeedback('Please enter a search term or command.', true);
+                    showFeedback('Please enter a command.', true);
                     return;
                 }
 
                 const lower = q.toLowerCase();
 
-                if (portfolioCommands.some(entry => lower.includes(entry))) {
-                    showFeedback('Opening portfolio...');
-                    setTimeout(() => window.location.assign('/portfolio/index.html'), 120);
+                if (knownCommands[lower]) {
+                    showFeedback('Searching...');
                     return;
                 }
 
-                if (gamesCommands.some(entry => lower.includes(entry))) {
-                    showFeedback('Opening games...');
-                    setTimeout(() => window.location.assign('https://sparxmaths.github.io'), 120);
-                    return;
-                }
-
-                // Fallback: site-scoped Google search
-                showFeedback('Searching site...');
-                const searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(q + ' site:gethin101.github.io');
-                setTimeout(() => window.location.assign(searchUrl), 120);
+                showFeedback(`Unknown command: "${q}"`, true);
             };
 
             form.addEventListener('submit', (e) => {
