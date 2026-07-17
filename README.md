@@ -20,6 +20,8 @@ A clean, modern portfolio site built with **HTML**, **CSS**, and **JavaScript**,
 ├── index.html
 ├── styles.css
 ├── script.js
+├── portfolio/
+│   └── index.html
 
 ├── files/
 │   └── index.html
