@@ -1,752 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gethin's Portfolio</title>
-
-    <meta name="description" content="Gethin's portfolio featuring embedded systems, robotics, PCB design, microcontroller projects, and programming work.">
-    <meta name="keywords" content="Gethin, portfolio, embedded systems, robotics, PCB design, microcontroller, Arduino, Raspberry Pi, ESP32, programming">
-    <meta name="author" content="Gethin">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://gethin101.github.io/">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Gethin's Portfolio">
-    <meta property="og:description" content="Embedded systems, robotics, PCB design, microcontroller projects & programming.">
-    <meta property="og:url" content="https://gethin101.github.io/">
-    <meta property="og:image" content="https://gethin101.github.io/assets/gallery/gallery1.jpeg">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Gethin's Portfolio">
-    <meta name="twitter:description" content="Embedded systems, robotics, PCB design, microcontroller projects & programming.">
-    <meta name="twitter:image" content="https://gethin101.github.io/assets/gallery/gallery1.jpeg">
-    <meta name="theme-color" content="#0f172a">
-
-    <link rel="stylesheet" href="styles.css">
+    <title>Gethin | Terminal Access</title>
+    <meta name="description" content="Choose a destination from the terminal prompt.">
     <style>
-        body.landing-gate-active {
-            overflow: hidden;
+        :root {
+            --bg: #05070f;
+            --panel: #0d121f;
+            --line: #263148;
+            --text: #d9fbe7;
+            --accent: #39ff7a;
+            --muted: #98b5a2;
+            --error: #ff8f8f;
         }
 
-        .welcome-gate {
-            position: fixed;
-            inset: 0;
-            z-index: 5000;
-            background: rgba(10, 14, 39, 0.78);
-            backdrop-filter: blur(10px);
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at top, #121a2d 0%, var(--bg) 60%);
+            color: var(--text);
+            font-family: "Consolas", "SFMono-Regular", "Menlo", "Monaco", monospace;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            transition: opacity 0.35s ease, visibility 0.35s ease;
+            padding: 24px;
         }
 
-        .welcome-gate.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+        .terminal {
+            width: min(700px, 100%);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+            background: var(--panel);
         }
 
-        .welcome-card {
-            width: min(95vw, 560px);
-            background: linear-gradient(160deg, #111735 0%, #1b2242 100%);
-            border: 1px solid rgba(0, 102, 204, 0.3);
-            border-radius: 14px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
-            padding: 2rem;
+        .terminal-head {
+            border-bottom: 1px solid var(--line);
+            padding: 10px 14px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.25);
         }
 
-        .welcome-card h2 {
-            margin-bottom: 0.6rem;
-            font-size: 1.7rem;
-            font-weight: 700;
+        .terminal-body {
+            padding: 18px 14px;
         }
 
-        .welcome-card p {
-            color: var(--text-light);
-            margin-bottom: 1.2rem;
+        .line {
+            margin-bottom: 10px;
+            color: var(--muted);
         }
 
-        .welcome-form {
+        .prompt-row {
             display: flex;
-            gap: 0.7rem;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.25);
         }
 
-        .welcome-input {
+        .prompt {
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        input {
             flex: 1;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: rgba(10, 14, 39, 0.7);
-            color: var(--text-white);
-            padding: 11px 14px;
-            font-size: 1rem;
+            border: 0;
+            background: transparent;
+            color: var(--text);
+            font: inherit;
             outline: none;
         }
 
-        .welcome-input:focus {
-            border-color: var(--accent-blue);
-            box-shadow: var(--glow-blue);
+        input::placeholder {
+            color: #6e8b78;
         }
 
-        .welcome-send {
-            border: 2px solid var(--accent-blue);
-            background: var(--accent-blue);
-            color: var(--text-white);
-            border-radius: 8px;
-            padding: 0 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .welcome-send:hover {
+        button {
+            border: 1px solid var(--accent);
             background: transparent;
-            color: var(--accent-blue);
-        }
-
-        .welcome-options {
-            display: flex;
-            gap: 0.55rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .welcome-chip {
-            border: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-white);
-            border-radius: 99px;
-            padding: 6px 12px;
-            font-size: 0.85rem;
+            color: var(--accent);
+            border-radius: 6px;
+            padding: 7px 10px;
+            font: inherit;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
-        .welcome-chip:hover {
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
+        button:hover {
+            background: rgba(57, 255, 122, 0.12);
         }
 
-        .welcome-feedback {
-            margin-top: 0.8rem;
-            min-height: 1.1rem;
-            color: #b9dbff;
+        #welcomeFeedback {
+            margin-top: 10px;
+            min-height: 1.2em;
+            color: var(--muted);
             font-size: 0.9rem;
+        }
+
+        #welcomeFeedback.error {
+            color: var(--error);
         }
     </style>
 </head>
-
-<body class="landing-gate-active">
-    <div id="welcomeGate" class="welcome-gate" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
-        <div class="welcome-card">
-            <h2 id="welcomeTitle">Hey, what do you want to visit?</h2>
-            <p>Type a destination below (try <strong>portfolio</strong> or <strong>games</strong>).</p>
-            <form id="welcomeForm" class="welcome-form">
-                <input id="welcomeInput" class="welcome-input" type="text" autocomplete="off" placeholder="Type your choice..." />
-                <button class="welcome-send" type="submit">Go</button>
+<body>
+    <main class="terminal" role="main">
+        <div class="terminal-head">terminal@gethin101.github.io</div>
+        <div class="terminal-body">
+            <p class="line">Destination command required.</p>
+            <form id="welcomeForm" autocomplete="off">
+                <div class="prompt-row">
+                    <span class="prompt">$</span>
+                    <input id="welcomeInput" type="text" placeholder="enter command" aria-label="Destination command" />
+                    <button type="submit">run</button>
+                </div>
             </form>
-            <div class="welcome-options">
-                <button class="welcome-chip" type="button" data-destination="portfolio">Portfolio</button>
-                <button class="welcome-chip" type="button" data-destination="games">Games</button>
-            </div>
-            <p id="welcomeFeedback" class="welcome-feedback"></p>
+            <p id="welcomeFeedback"></p>
+            <noscript><p class="line">JavaScript is required to continue.</p></noscript>
         </div>
-    </div>
-    
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="#home" class="logo">Gethin</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="files.html">Files</a></li>
-            </ul>
-        </div>
-    </nav>
+    </main>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 id="typewriter">Hi, I'm Gethin</h1>
-                <p>Embedded systems, robotics, PCB design, microcontrollers & programming portfolio</p>
-                <a href="#projects" class="cta-button">View My Work</a>
-            </div>
-        </div>
-    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("welcomeForm");
+            const input = document.getElementById("welcomeInput");
+            const feedback = document.getElementById("welcomeFeedback");
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>I'm a passionate teen engineer focused on programming, embedded electronics and 3D printing. 
-                I am learning multiple programming languages and becoming experienced with different softwares that are used in the modern industry.</p>
-            
-            <div class="about-grid">
-                <div class="about-card">
-                    <h3>Web Development</h3>
-                    <ul>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>Vanilla JavaScript</li>
-                        <li>GitHub Pages</li>
-                        <li>Responsive Design</li>
-                        <li>DNS Registration</li>
-                    </ul>
-                </div>
-                <div class="about-card">
-                    <h3>Maker Skills</h3>
-                    <ul>
-                        <li>CAD & 3D Printing</li>
-                        <li>PCB Design</li>
-                        <li>Soldering & Circuit Assembly</li>
-                        <li>Mechanical prototyping</li>
-                        <li>Arduino, Raspberry Pi & ESP32</li>
-                        <li>Laser Cutting & Pewter Casting</li>
-                    </ul>
-                </div>
-                <div class="about-card">
-                    <h3>Software</h3>
-                    <ul>
-                        <li>Python / Terminal</li>
-                        <li>Markdown & Documentation</li>
-                        <li>Git / GitHub</li>
-                        <li>KiCad & Fusion360</li>
-                        <li>VS Code & CircuitPython</li>
-                        <li>Thonny & Arduino IDE</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+            const portfolioCommands = ["portfolio", "projects", "project", "home", "site", "index", "main"];
+            const gamesCommands = ["games", "game", "play", "sparx", "sparxmaths"];
 
+            const redirectTo = (url, message) => {
+                feedback.classList.remove("error");
+                feedback.textContent = message;
+                setTimeout(() => window.location.assign(url), 120);
+            };
 
-    <!-- Image Carousel Section -->
-    <section class="image-carousel-section">
-        <div class="container">
-            <div class="carousel-wrapper">
-                <button class="carousel-arrow left-arrow" onclick="prevImageSlide()">‹</button>
-                <div class="image-carousel">
-                    <div class="carousel-track">
+            const handleInput = () => {
+                const command = input.value.trim().toLowerCase();
 
-<div class="carousel-image-item">
-    <img src="assets/gallery/gallery5.png" alt="Project photo 5">
-</div>
+                if (!command) {
+                    feedback.classList.add("error");
+                    feedback.textContent = "Enter a command.";
+                    return;
+                }
 
-<div class="carousel-image-item">
-    <img src="assets/gallery/gallery3.jpeg" alt="Project photo 3">
-</div>
+                if (portfolioCommands.some((entry) => command.includes(entry))) {
+                    redirectTo("/portfolio/index.html", "Redirecting...");
+                    return;
+                }
 
- <div class="carousel-image-item active">
-    <img src="assets/gallery/gallery1.jpeg" alt="Project photo 1">
-</div>
+                if (gamesCommands.some((entry) => command.includes(entry))) {
+                    redirectTo("https://sparxmaths.github.io", "Redirecting...");
+                    return;
+                }
 
-                        
-<div class="carousel-image-item">
-    <img src="assets/gallery/gallery2.png" alt="Project photo 2">
-</div>
+                feedback.classList.add("error");
+                feedback.textContent = "Unknown command.";
+            };
 
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                handleInput();
+            });
 
+            input.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    handleInput();
+                }
+            });
 
-<div class="carousel-image-item">
-    <img src="assets/gallery/gallery4.png" alt="Project photo 4">
-</div>
-
-
-                    </div>
-                </div>
-                <button class="carousel-arrow right-arrow" onclick="nextImageSlide()">›</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2>Featured Projects</h2>
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="Gethin Hackpad v1"
-                    data-description="A 3x3 Cherry MX keyswitch macropad for computer shortcuts powered by a Seeed Xiao RP2040 microcontroller with a 0.91 inch OLED display."
-                    data-details="I built this as a hackpad project that was funded by HackClub. I designed a custom PCB in KiCad, a case in Fusion360 and assembled and soldered the components by hand. The firmware was written in CircuitPython using the KMK module"
-                    data-role="Designer + Developer"
-                    data-timeline="2025"
-                    data-tech-stack="KiCad|CircuitPython|Fusion360"
-                    data-images="assets/projects/project1-1.jpeg|assets/projects/project1-2.png|assets/projects/project1-3.png">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project1-1.jpeg" alt="Gethin Hackpad v1 image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project1-2.png" alt="Gethin Hackpad v1 image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project1-3.png" alt="Gethin Hackpad v1 image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Gethin Hackpad v1</h3>
-                        <p>A 3x3 Cherry MX keyswitch macropad for computer shortcuts powered by a Seeed Xiao RP2040 microcontroller with a 0.91 inch OLED display.</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">KiCad</span>
-                            <span class="tech-badge">CircuitPython</span>
-                            <span class="tech-badge">Fusion360</span>
-                        </div>
-                        <a href="https://github.com/gethin101/hackpad_2025"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="GG Battle Robot"
-                    data-description="A custom robot-wars inspired combat robot with a servo-driven axe weapon and Raspberry Pi Pico Wi-Fi access point control."
-                    data-details="I took inspiration from Thor and Apollo from Robot Wars and designed my robot first on paper then in Fusion360 with many different iterations and design changes."
-                    data-role="Designer + Builder"
-                    data-timeline="2026"
-                    data-tech-stack="MicroPython|Fusion360|KiCad"
-                    data-images="assets/projects/project2-1.png|assets/projects/project2-2.png|assets/projects/project2-4.jpeg">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project2-1.png" alt="GG Battle Robot image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project2-2.png" alt="GG Battle Robot image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project2-4.jpeg" alt="GG Battle Robot image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>GG Battle Robot</h3>
-                        <p>A custom robot-wars inspired combat robot with a servo-driven axe weapon and Raspberry Pi Pico Wi-Fi access point control.</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">MicroPython</span>
-                            <span class="tech-badge">Fusion360</span>
-                            <span class="tech-badge">KiCad</span>
-                        </div>
-                        <a href="https://github.com/gethin101/GG-Battle-robot"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="Gethin-75 Keyboard"
-                    data-description="A custom 75% mechanical keyboard with macro keys powered by a Raspberry Pi Pico and KMK CircuitPython firmware."
-                    data-details="I took inspiration from other HackClub mechanical keyboards and designed my PCB in KiCad, case in Fusion360 and assembled every component by hand."
-                    data-role="Designed + Builder"
-                    data-timeline="2026"
-                    data-tech-stack="KiCad|Fusion360|CircuitPython"
-                    data-images="assets/projects/project3-1.jpg|assets/projects/project3-2.png|assets/projects/project3-3.png">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project3-1.jpg" alt="Gethin-75 Keyboard image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project3-2.png" alt="Gethin-75 Keyboard image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project3-3.png" alt="Gethin-75 Keyboard image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Gethin-75 Keyboard</h3>
-                        <p>A custom 75% mechanical keyboard with macro keys powered by a Raspberry Pi Pico and KMK CircuitPython firmware.</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">KiCad</span>
-                            <span class="tech-badge">Fusion360</span>
-                            <span class="tech-badge">CircuitPython</span>
-                        </div>
-                        <a href="https://github.com/gethin101/Gethin-75"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="Ghost One"
-                    data-description="A design for a custom flipper-inspired pentesting and access control multi-tool device."
-                    data-details="I was heavily inspired by the Flipper Zero for this project. I sourced parts online and designed the PCB - but assembly is still in progress"
-                    data-role="Designer"
-                    data-timeline="2026"
-                    data-tech-stack="ESP32|HAK5 Payloads|KiCad"
-                    data-images="assets/projects/project4-1.png|assets/projects/project4-2.png|assets/projects/project4-3.png">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project4-1.png" alt="Ghost One image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project4-2.png" alt="Ghost One image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project4-3.png" alt="Ghost One image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Ghost One</h3>
-                        <p>A design for a custom flipper-inspired pentesting and access control multi-tool device.</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">ESP32</span>
-                            <span class="tech-badge">HAK5 Payloads</span>
-                            <span class="tech-badge">KiCad</span>
-                        </div>
-                       <a href="https://github.com/gethin101/GhostOne"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
-
-                    <!-- Project 6 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="IC 555 Blinky"
-                    data-description="An astable LED circuit board blinker built around a 555 timer."
-                    data-details="I designed this PCB circuit (with no microcontrollers) in KiCad for HackClub Blueprint. I messed up the first assembly but I will be remaking and rebuilding it soon."
-                    data-role="Designer"
-                    data-timeline="2026"
-                    data-tech-stack="KiCad|JLCPCB|HackClub"
-                    data-images="assets/projects/project6-3.png|assets/projects/project6-2.png|assets/projects/project6-1.png">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project6-3.png" alt="IC 555 Blinky image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project6-2.png" alt="IC 555 Blinky image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project6-1.png" alt="IC 555 Blinky image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>IC 555 Blinky</h3>
-                        <p>An astable LED circuit board blinker built around a 555 timer.</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">KiCad</span>
-                            <span class="tech-badge">JLCPCB</span>
-                            <span class="tech-badge">HackClub</span>
-                        </div>
-                    <a href="https://github.com/gethin101/Gethin-blinky"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
-
-                <!-- Project 5 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="A1 Mini Camera System"
-                    data-description="External camera system designed for smoother timelapses with the Bambu Lab A1 Mini 3D printer."
-                    data-details="I designed this camera system for the HackClub Rework program and for my A1 Mini 3D printer"
-                    data-role="Designer"
-                    data-timeline="2026"
-                    data-tech-stack="G-code|Fusion360|Python"
-                    data-images="assets/projects/project5-1.png|assets/projects/project5-2.jpg|assets/projects/project5-3.png">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project5-1.png" alt="A1 Mini Camera System image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project5-2.jpg" alt="A1 Mini Camera System image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project5-3.png" alt="A1 Mini Camera System image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>A1 Mini Camera System</h3>
-                        <p>External camera system designed for smoother timelapses with the Bambu Lab A1 Mini 3D printer.</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">G-code</span>
-                            <span class="tech-badge">Fusion360</span>
-                            <span class="tech-badge">Python</span>
-                        </div>
-                  <a href="https://github.com/gethin101/A1-mini-camera-system"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
-
-                                <!-- Project 7 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="Terminator Eyes"
-                    data-description="Simple terminator eyes LED fade-in and fade-out animation project with raspberry pi pico microcontroller, 1N4148 diode and 1000uF electrolytic capacitor"
-                    data-details="I will add a project description and photos when I start building this."
-                    data-role="Designer + Builder"
-                    data-timeline="2026"
-                    data-tech-stack="Thonny|CircuitPython|Soldering"
-                    data-images="assets/projects/project7-1.png|assets/projects/project7-2.jpg|assets/projects/project7-3.png">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project7-1.png" alt="Terminator Eyes image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project7-2.jpg" alt="Terminator Eyes image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project7-3.png" alt="Terminator Eyes image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Terminator Eyes</h3>
-                        <p>Simple terminator eyes LED fade-in and fade-out animation project with raspberry pi pico, 1N4148 diode and 1000uF electrolytic capacitor</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Thonny</span>
-                            <span class="tech-badge">CircuitPython</span>
-                            <span class="tech-badge">Soldering</span>
-                        </div>
-                  <a href="https://github.com/gethin101/terminator-eyes"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
-
-                
-
-                                <!-- Project 8 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="Upcoming project"
-                    data-description="New project coming soon"
-                    data-details="I will write about my project more here"
-                    data-role="Unknown"
-                    data-timeline="2026"
-                    data-tech-stack="Unknown|Unknown|Unknown"
-                    data-images="assets/projects/project8-1.png|assets/projects/project8-2.jpg|assets/projects/project8-3.png">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project8-1.png" alt="Upcoming project image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project8-2.jpg" alt="Upcoming project image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project8-3.png" alt="Upcoming project image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Upcoming project</h3>
-                        <p>New project coming soon</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Unknown</span>
-                            <span class="tech-badge">Unknown</span>
-                            <span class="tech-badge">Unknown</span>
-                        </div>
-                  <a href="https://github.com/gethin101"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
-
-                
-
-                                <!-- Project 9 -->
-                <div class="project-card" onclick="openProjectModal(this)"
-                    data-title="Upcoming project"
-                    data-description="New project coming soon"
-                    data-details="I will write about my project more here"
-                    data-role="Unkown"
-                    data-timeline="2026"
-                    data-tech-stack="Uknown|Unknown|Unknown"
-                    data-images="assets/projects/project9-1.png|assets/projects/project9-2.jpg|assets/projects/project9-3.png">
-                    <div class="project-image-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active"><img src="assets/projects/project9-1.png" alt="Upcoming project image 1"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project9-2.jpg" alt="Upcoming project image 2"></div>
-                            <div class="carousel-slide"><img src="assets/projects/project9-3.png" alt="Upcoming project image 3"></div>
-                        </div>
-                        <div class="image-nav">
-                            <button class="img-arrow left" onclick="event.stopPropagation(); changeCarouselSlide(event, -1, this.closest('.project-card'))">‹</button>
-                            <div class="carousel-dots">
-                                <div class="dot active" onclick="event.stopPropagation(); changeCarouselSlide(event, 0, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))"></div>
-                                <div class="dot" onclick="event.stopPropagation(); changeCarouselSlide(event, 2, this.closest('.project-card'))"></div>
-                            </div>
-                            <button class="img-arrow right" onclick="event.stopPropagation(); changeCarouselSlide(event, 1, this.closest('.project-card'))">›</button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Upcoming project</h3>
-                        <p>New project coming soon</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Unknown</span>
-                            <span class="tech-badge">Unknown</span>
-                            <span class="tech-badge">Unknown</span>
-                        </div>
-                  <a href="https://github.com/gethin101"
-   class="github-link"
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="event.stopPropagation()">
-   View on GitHub →
-</a>
-
-                    </div>
-                </div>
-
-            
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Modal -->
-    <div id="projectModal" class="project-modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeProjectModal()">✕</button>
-            <div class="modal-header">
-                <div class="modal-image-gallery">
-                    <div class="carousel-container">
-                        <div class="modal-gallery-slide active"><img id="modalImage1" src="assets/projects/project1-1.jpg" alt="Project image 1"></div>
-                        <div class="modal-gallery-slide"><img id="modalImage2" src="assets/projects/project1-2.jpg" alt="Project image 2"></div>
-                        <div class="modal-gallery-slide"><img id="modalImage3" src="assets/projects/project1-3.jpg" alt="Project image 3"></div>
-                    </div>
-                    <button class="modal-img-arrow modal-left" onclick="event.stopPropagation(); changeModalSlideBy(-1)">‹</button>
-                    <div class="modal-gallery-dots">
-                        <div class="modal-gallery-dot active" onclick="event.stopPropagation(); changeModalSlide(0)"></div>
-                        <div class="modal-gallery-dot" onclick="event.stopPropagation(); changeModalSlide(1)"></div>
-                        <div class="modal-gallery-dot" onclick="event.stopPropagation(); changeModalSlide(2)"></div>
-                    </div>
-                    <button class="modal-img-arrow modal-right" onclick="event.stopPropagation(); changeModalSlideBy(1)">›</button>
-                </div>
-            </div>
-
-            <div class="modal-body">
-                <h2 id="modalTitle">Project Title</h2>
-                <div class="modal-grid">
-                    <div class="modal-left">
-                        <h3>Overview</h3>
-                        <p id="modalDescription">Project description goes here.</p>
-                        <p id="modalDetails">Additional details about the project.</p>
-                    </div>
-                    <div class="modal-right">
-                        <h3>Project Details</h3>
-                        <div class="detail-item">
-                            <strong>Tech Stack:</strong>
-                            <div id="modalTechStack" class="tech-stack"></div>
-                        </div>
-                        <div class="detail-item">
-                            <strong>Role:</strong>
-                            <p id="modalRole">Role</p>
-                        </div>
-                        <div class="detail-item">
-                            <strong>Timeline:</strong>
-                            <p id="modalTimeline">Timeline</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-gallery">
-                    <h3>Project Gallery</h3>
-                    <div class="gallery-grid">
-                        <div class="gallery-item" onclick="event.stopPropagation(); openGalleryImage(0)"><img id="modalGalleryThumb1" src="assets/projects/project1-1.jpg" alt="Project gallery image 1"></div>
-                        <div class="gallery-item" onclick="event.stopPropagation(); openGalleryImage(1)"><img id="modalGalleryThumb2" src="assets/projects/project1-2.jpg" alt="Project gallery image 2"></div>
-                        <div class="gallery-item" onclick="event.stopPropagation(); openGalleryImage(2)"><img id="modalGalleryThumb3" src="assets/projects/project1-3.jpg" alt="Project gallery image 3"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gallery Image Popup -->
-    <div id="galleryPopup" class="gallery-popup">
-        <button class="popup-close" onclick="closeGalleryImage()">✕</button>
-        <div class="popup-image">
-            <img id="popupImage" src="assets/projects/project1-1.jpg" alt="Project gallery image">
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Gethin. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+            input.focus();
+        });
+    </script>
 </body>
 </html>
